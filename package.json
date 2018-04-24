@@ -28,10 +28,5 @@
     "roots": [
       "app"
     ]
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
   }
 }

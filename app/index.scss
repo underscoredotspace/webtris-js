@@ -25,4 +25,32 @@ body {
   flex: 1;
   border: solid 1px black;
   background: silver;
+
+  &[type="x"] {
+    background: white;
+  }
+
+  &[type="l"] {
+    background: red;
+  }
+
+  &[type="j"] {
+    background: orange;
+  }
+
+  &[type="s"] {
+    background: yellow;
+  }
+
+  &[type="z"] {
+    background: green;
+  }
+
+  &[type="o"] {
+    background: blue;
+  }
+
+  &[type="t"] {
+    background: purple;
+  }
 }

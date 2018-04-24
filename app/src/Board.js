@@ -2,7 +2,11 @@ import Row from '../src/Row'
 
 export default class Board {
   constructor() {
-    this.rows = new Array(18).fill(new Row)
+    this.rows = []
+
+    for (let ndx = 0; ndx<=17; ndx++) {
+      this.rows[ndx] = new Row()
+    }
   }
 
   render() {

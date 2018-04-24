@@ -2,7 +2,10 @@ import Block from "./Block"
 
 export default class Row {
   constructor() {
-    this.blocks = new Array(10).fill(new Block())
+    this.blocks = []
+    for (let ndx = 0; ndx<=9; ndx++) {
+      this.blocks[ndx] = new Block()
+    }
   }
 
   render() {
