@@ -1,0 +1,28 @@
+body {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 100vh;
+}
+
+.board {
+  --board-size: 34;
+  width: calc(var(--board-size) * 10px);
+  height: calc(var(--board-size) * 18px);
+  display: flex;
+  flex-flow: column nowrap;
+  border: solid 1px black;
+}
+
+.row {
+  flex: 1;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.block {
+  flex: 1;
+  border: solid 1px black;
+  background: silver;
+}
