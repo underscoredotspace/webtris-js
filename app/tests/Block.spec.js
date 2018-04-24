@@ -12,7 +12,7 @@ describe('Block', () => {
     expect(block.type).toBe('x')
   })
 
-  test('draw method', () => {
+  test('render method', () => {
     expect.assertions(1)
     expect(block.render()).toBe(`<div class="block" type="x"></div>`)
   })

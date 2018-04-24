@@ -13,9 +13,9 @@ describe('Row', () => {
     expect(row.blocks[0]).toBeInstanceOf(Block)
   })
 
-  test('draw method', () => {
+  test('render method', () => {
     expect.assertions(1)
     const blockHTML = `<div class="block" type="x"></div><div class="block" type="x"></div><div class="block" type="x"></div><div class="block" type="x"></div><div class="block" type="x"></div><div class="block" type="x"></div><div class="block" type="x"></div><div class="block" type="x"></div><div class="block" type="x"></div><div class="block" type="x"></div>`
-    expect(row.render()).toBe(`<div class="row">\n\t${blockHTML}\n</div>`)
+    expect(row.render()).toBe(`<div class="row">\n\t\t${blockHTML}\n</div>`)
   })
 })

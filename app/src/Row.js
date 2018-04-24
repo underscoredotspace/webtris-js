@@ -7,6 +7,6 @@ export default class Row {
 
   render() {
     const blockHTML = this.blocks.map(block => block.render()).join('')
-    return `<div class="row">\n\t${blockHTML}\n</div>`
+    return `<div class="row">\n\t\t${blockHTML}\n</div>`
   }
 }
