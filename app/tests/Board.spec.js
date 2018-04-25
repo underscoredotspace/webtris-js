@@ -12,10 +12,9 @@ describe('Board', () => {
   })
 
   test('has 18 rows with 10 columns filled with 0', () => {
-    expect.assertions(3)
-    expect(board.rows).toBeInstanceOf(Array)
-    expect(board.rows).toHaveLength(18)
-    expect(board.rows[random(0,17)]).toBeInstanceOf(Row)
+    expect.assertions(2)
+    expect(board.board).toBeInstanceOf(Array)
+    expect(board.board).toHaveLength(180)
   })
 
   test('render method', () => {

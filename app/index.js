@@ -7,11 +7,11 @@ let updateTime = performance.now()
 
 function update() {
   webtris.innerHTML = board.render()
-  if (performance.now() > updateTime + 1000) {
-    updateTime = performance.now()
-    // board.drop()
-  }
-  requestAnimationFrame(update)
+  // if (performance.now() > updateTime + 1000) {
+  //   updateTime = performance.now()
+  //   // board.drop()
+  // }
+  // requestAnimationFrame(update)
 }
 
 update()

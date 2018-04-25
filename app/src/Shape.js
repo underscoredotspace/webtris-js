@@ -78,15 +78,6 @@ export default class Shape {
   }
 
   render(rows) {
-    for (let gridRow in this.grid) {
-      for (let gridCol in this.grid[gridRow]) {
-        const row = Number(gridRow)+Number(this.position.y)
-        const col = Number(gridCol)+Number(this.position.x)
-        if (this.grid[gridRow][gridCol] == 1) {
-          rows[row].blocks[col].type = this.type
-        }
-      }
-    }
-    return rows
+    // todo
   }
 }
