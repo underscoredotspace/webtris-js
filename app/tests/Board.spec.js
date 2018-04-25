@@ -1,6 +1,4 @@
 import Board from '../src/Board'
-import Block from '../src/Block'
-import Row from '../src/Row'
 
 const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
