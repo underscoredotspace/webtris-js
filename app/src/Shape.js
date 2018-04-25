@@ -61,7 +61,7 @@ export default class Shape {
     
     this.type = type
     this.grid = grid
-    this.position = {x: start, y: 1}
+    this.position = {x: start, y: 0}
   }
 
   randomShape() {
@@ -77,16 +77,44 @@ export default class Shape {
     this.position.y += y
   }
 
-  render(rows) {
-    for (let gridRow in this.grid) {
-      for (let gridCol in this.grid[gridRow]) {
-        const row = Number(gridRow)+Number(this.position.y)
-        const col = Number(gridCol)+Number(this.position.x)
-        if (this.grid[gridRow][gridCol] == 1) {
-          rows[row].blocks[col].type = this.type
+  rotateCCW() {
+    const rows = this.grid.slice()
+    const newRows = [...Array(rows[0].length)].map(e => Array(rows.length))
+
+    for (let row in rows) {
+      for (let col in rows[row]) {
+        newRows[rows[0].length-col-1][row] = rows[row][col]
+      }
+    }
+
+    this.grid = newRows
+  }
+
+  rotateCW() {
+    this.rotateCCW()
+    this.rotateCCW()
+    this.rotateCCW()
+    // const rows = this.grid.slice()
+    // const newRows = [...Array(rows[0].length)].map(e => Array(rows.length))
+
+    // for (let row in rows) {
+    //   for (let col in rows[row]) {
+    //     newRows[rows[0].length-col-1][row] = rows[row][col]
+    //   }
+    // }
+
+    // this.grid = newRows
+  }
+
+  addTo(rows) {
+    for (let row in this.grid){
+      for (let col in this.grid[row]) {
+        if (this.grid[row][col] == 1) {
+          rows[Number(row)+this.position.y][Number(col)+this.position.x] = this.type
         }
       }
     }
+
     return rows
   }
 }
