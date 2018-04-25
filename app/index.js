@@ -27,5 +27,8 @@ window.addEventListener('keydown', key => {
   } else if (key.key == 'z') {
     board.shape.rotateCCW()
     webtris.innerHTML = board.render()
+  } else if (key.key == 'x') {
+    board.shape.rotateCW()
+    webtris.innerHTML = board.render()
   }
 })

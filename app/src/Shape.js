@@ -90,6 +90,22 @@ export default class Shape {
     this.grid = newRows
   }
 
+  rotateCW() {
+    this.rotateCCW()
+    this.rotateCCW()
+    this.rotateCCW()
+    // const rows = this.grid.slice()
+    // const newRows = [...Array(rows[0].length)].map(e => Array(rows.length))
+
+    // for (let row in rows) {
+    //   for (let col in rows[row]) {
+    //     newRows[rows[0].length-col-1][row] = rows[row][col]
+    //   }
+    // }
+
+    // this.grid = newRows
+  }
+
   addTo(rows) {
     for (let row in this.grid){
       for (let col in this.grid[row]) {
