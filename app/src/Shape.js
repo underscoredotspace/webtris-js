@@ -61,7 +61,7 @@ export default class Shape {
     
     this.type = type
     this.grid = grid
-    this.position = {x: start, y: 1}
+    this.position = {x: start, y: 0}
   }
 
   randomShape() {
@@ -75,6 +75,19 @@ export default class Shape {
   move(x, y) {
     this.position.x += x
     this.position.y += y
+  }
+
+  rotateCCW() {
+    const rows = this.grid.slice()
+    const newRows = [...Array(rows[0].length)].map(e => Array(rows.length))
+
+    for (let row in rows) {
+      for (let col in rows[row]) {
+        newRows[rows[0].length-col-1][row] = rows[row][col]
+      }
+    }
+
+    this.grid = newRows
   }
 
   addTo(rows) {
