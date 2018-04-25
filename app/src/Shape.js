@@ -77,7 +77,15 @@ export default class Shape {
     this.position.y += y
   }
 
-  render(rows) {
-    // todo
+  addTo(rows) {
+    for (let row in this.grid){
+      for (let col in this.grid[row]) {
+        if (this.grid[row][col] == 1) {
+          rows[Number(row)+this.position.y][Number(col)+this.position.x] = this.type
+        }
+      }
+    }
+
+    return rows
   }
 }

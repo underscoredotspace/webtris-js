@@ -3,11 +3,15 @@ import Shape from '../src/Shape'
 export default class Board {
   constructor() {
     this.board = new Array(18*10).fill('x')
-    this.shape = new Shape()
+    this.shape = null
   }
 
   render() {
-    const rows = this.rows()
+    let rows = this.rows()
+    if (this.shape) {
+      rows = this.shape.addTo(rows)
+    }
+
     const boardHTML = ['<div class="board">']
     for (let row of rows) {
       boardHTML.push('\t<div class="row">\n')
@@ -21,6 +25,10 @@ export default class Board {
 
     return boardHTML.join('')
   } 
+
+  newShape() {
+    this.shape = new Shape()
+  }
   
   rows() {
     let rows = []
@@ -33,8 +41,8 @@ export default class Board {
     return rows
   }
   
-  row(row) {
-    const rowStart = row * 9
-    return this.board.slice(rowStart, rowStart+10)
-  }
+  // row(row) {
+  //   const rowStart = row * 9
+  //   return this.board.slice(rowStart, rowStart+10)
+  // }
 }
