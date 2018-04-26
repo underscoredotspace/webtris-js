@@ -4,7 +4,7 @@ const board = new Board()
 const webtris = document.querySelector('.webtris')
 
 function update() {
-  if (performance.now() > updateTime + 1000) {
+  if ((performance.now() > updateTime + 1000) && !window.webtrisPaused) {
     board.shape.move(0,1)
     webtris.innerHTML = board.render()
     updateTime = performance.now()
@@ -18,6 +18,18 @@ let updateTime = performance.now()-1000
 update()
 
 window.addEventListener('keydown', key => {
+  if (key.key == 'p') {
+    if (window.webtrisPaused === true) {
+      window.webtrisPaused = false
+    } else {
+      window.webtrisPaused = true
+    }
+  }
+
+  if (window.webtrisPaused) {
+    return
+  }
+
   if (key.key == 'ArrowLeft') {
     board.shape.move(-1,0)
     webtris.innerHTML = board.render()

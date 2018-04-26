@@ -41,8 +41,8 @@ export default class Board {
     return rows
   }
   
-  // row(row) {
-  //   const rowStart = row * 9
-  //   return this.board.slice(rowStart, rowStart+10)
-  // }
+  row(row) {
+    const rowStart = row * 9
+    return this.board.slice(rowStart, rowStart+10)
+  }
 }

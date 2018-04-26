@@ -1,4 +1,4 @@
-const shapes = [
+export const shapes = [
   {
     type: 'l',
     start: 3,

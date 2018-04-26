@@ -1,4 +1,4 @@
-import Shape from '../src/Shape'
+import Shape, {shapes} from '../src/Shape'
 
 describe('Shape', () => {
   let shape
