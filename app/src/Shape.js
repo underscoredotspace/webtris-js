@@ -91,19 +91,16 @@ export default class Shape {
   }
 
   rotateCW() {
-    this.rotateCCW()
-    this.rotateCCW()
-    this.rotateCCW()
-    // const rows = this.grid.slice()
-    // const newRows = [...Array(rows[0].length)].map(e => Array(rows.length))
+    const rows = this.grid.slice()
+    const newRows = [...Array(rows[0].length)].map(e => Array(rows.length))
 
-    // for (let row in rows) {
-    //   for (let col in rows[row]) {
-    //     newRows[rows[0].length-col-1][row] = rows[row][col]
-    //   }
-    // }
+    for (let row in rows) {
+      for (let col in rows[row]) {
+        newRows[col][rows.length-row-1] = rows[row][col]
+      }
+    }
 
-    // this.grid = newRows
+    this.grid = newRows
   }
 
   addTo(rows) {

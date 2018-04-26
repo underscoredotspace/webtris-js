@@ -23,7 +23,7 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "app/**/*.js"
+      "app/src/**/*.js"
     ],
     "roots": [
       "app"
