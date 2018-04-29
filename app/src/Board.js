@@ -45,7 +45,7 @@ export default class Board {
   
   rows() {
     let rows = []
-    for (let row = 0; row <= this.boardH; row++) {
+    for (let row = 0; row <= (this.boardH-1); row++) {
       const rowStart = row * (this.boardW-1)
       rows.push(
         this.board.slice(rowStart, rowStart+this.boardW)
