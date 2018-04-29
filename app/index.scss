@@ -19,6 +19,10 @@ body {
   flex: 1;
   display: flex;
   flex-flow: row nowrap;
+
+  &:first-of-type {
+    opacity: 0.5;
+  }
 }
 
 .block {

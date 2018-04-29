@@ -4,7 +4,7 @@ describe('Shape', () => {
   let shape
   
   beforeEach(() => {
-    shape = new Shape()
+    shape = new Shape({w:10, h:18})
   })
 
   test('initial setup', () => {
@@ -16,7 +16,6 @@ describe('Shape', () => {
   })
 
   test('move method - positive move', () => {
-    const shape = new Shape()
     const startX = shape.position.x
     const startY = shape.position.y
     shape.move(1,1)
@@ -25,17 +24,15 @@ describe('Shape', () => {
   })
 
   test('move method - negative move', () => {
-    const shape = new Shape()
     const startX = shape.position.x
     const startY = shape.position.y
     shape.move(-1,-1)
     expect(shape.position.x).toBe(startX-1)
-    expect(shape.position.y).toBe(startY-1)
+    expect(shape.position.y).toBe(startY)
   })
 
   test('rotate CCW', () => {
     const testShape = shapes[0]
-    const shape = new Shape()
     shape.grid = testShape.grid
     shape.type = testShape.type
     shape.position = {x: testShape.start, y: 0}
@@ -47,7 +44,6 @@ describe('Shape', () => {
 
   test('rotate CW', () => {
     const testShape = shapes[0]
-    const shape = new Shape()
     shape.grid = testShape.grid
     shape.type = testShape.type
     shape.position = {x: testShape.start, y: 0}
