@@ -146,13 +146,15 @@ export default class Shape {
       }
     }
 
-    this.grid = newRows
-
     this.position.x -= this.rotateFix[this.rotateFixPos].x
     this.position.y -= this.rotateFix[this.rotateFixPos].y
-    
+
     this.rotateFixPos--
     if (this.rotateFixPos == -1) {this.rotateFixPos = this.rotateFix.length-1}
+
+    this.correctPosition(newRows, () => {
+      this.grid = newRows
+    })
   }
 
   rotateCW() {
@@ -167,13 +169,26 @@ export default class Shape {
       }
     }
 
-    this.grid = newRows
-
     this.rotateFixPos++
     if (this.rotateFixPos == this.rotateFix.length) {this.rotateFixPos = 0}
-
+    
     this.position.x += this.rotateFix[this.rotateFixPos].x
     this.position.y += this.rotateFix[this.rotateFixPos].y
+
+    this.correctPosition(newRows, () => {
+      this.grid = newRows
+    })
+  }
+
+  correctPosition(newRows, cb) {
+    if (this.position.x < 0) {
+      this.position.x = 0
+    }
+
+    if ((this.position.x+newRows[0].length+1) > this.boardSize.w) {
+      this.position.x = this.boardSize.w - newRows[0].length
+    }
+    cb()
   }
 
   addTo(rows) {
