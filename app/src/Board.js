@@ -1,4 +1,5 @@
 import Shape from '../src/Shape'
+import shapes from '../src/shapes'
 
 export default class Board {
   constructor() {

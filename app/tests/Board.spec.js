@@ -1,5 +1,6 @@
 import Board from '../src/Board'
-import Shape, { shapes } from '../src/Shape'
+import Shape from '../src/Shape'
+import shapes from '../src/shapes'
 
 const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
