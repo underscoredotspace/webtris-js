@@ -57,15 +57,19 @@ export default class Shape {
       }
     }
 
-    this.position.x -= this.rotateFix[this.rotateFixPos].x
-    this.position.y -= this.rotateFix[this.rotateFixPos].y
+    const newPosition = {
+      x: this.position.x - this.rotateFix[this.rotateFixPos].x,
+      y: this.position.y - this.rotateFix[this.rotateFixPos].y
+    }
 
-    this.rotateFixPos--
-    if (this.rotateFixPos == -1) {this.rotateFixPos = this.rotateFix.length-1}
+    let newRotateFixPos =  this.rotateFixPos-1
+    if (newRotateFixPos == -1) {newRotateFixPos = this.rotateFix.length-1}
 
-    this.correctPosition(newRows, () => {
+    if (this.positionOk(newRows, newPosition)) {
       this.grid = newRows
-    })
+      this.position = Object.assign({}, newPosition)
+      this.rotateFixPos = newRotateFixPos
+    }
   }
 
   rotateCW() {
@@ -80,26 +84,27 @@ export default class Shape {
       }
     }
 
-    this.rotateFixPos++
-    if (this.rotateFixPos == this.rotateFix.length) {this.rotateFixPos = 0}
+    let newRotateFixPos = this.rotateFixPos+1
+    if (newRotateFixPos == this.rotateFix.length) {newRotateFixPos = 0}
     
-    this.position.x += this.rotateFix[this.rotateFixPos].x
-    this.position.y += this.rotateFix[this.rotateFixPos].y
+    const newPosition = {
+      x: this.position.x + this.rotateFix[newRotateFixPos].x,
+      y: this.position.y + this.rotateFix[newRotateFixPos].y
+    }
 
-    this.correctPosition(newRows, () => {
+    if (this.positionOk(newRows, newPosition)) {
       this.grid = newRows
-    })
+      this.position = Object.assign({}, newPosition)
+      this.rotateFixPos = newRotateFixPos
+    }
   }
 
-  correctPosition(newRows, cb) {
-    if (this.position.x < 0) {
-      this.position.x = 0
+  positionOk(newRows, newPosition) {
+    if ((newPosition.x < 0) || (newPosition.x+newRows[0].length+1) > this.boardSize.w) {
+      return false
     }
 
-    if ((this.position.x+newRows[0].length+1) > this.boardSize.w) {
-      this.position.x = this.boardSize.w - newRows[0].length
-    }
-    cb()
+    return true
   }
 
   addTo(rows) {
