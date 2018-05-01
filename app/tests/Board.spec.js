@@ -18,12 +18,7 @@ describe('Board', () => {
 
   test('render method', () => {
     expect.assertions(1)
-    const blockHTML = new Array(10).fill('<div class="block" type="x"></div>').join('') // cheat
-    const rowHTML = `<div class="row">${blockHTML}</div>`
-    const cleanRows = new Array(19).fill(rowHTML).join('').replace(/[\n\t]/g, '')
-    const boardHTML = `<div class="board">${cleanRows}</div>`
-
-    expect(board.render().replace(/[\n\t]/g, '')).toBe(boardHTML)
+    expect(board.render()).toMatchSnapshot()
   })
 
   test('newShape method should add new Shape to this.shape', () => {
@@ -36,15 +31,14 @@ describe('Board', () => {
     expect(board.row(0)).toEqual(row)
   })
 
-  // test('render method with board.shape', () => {
-  //   const testShape = shapes[0]
-  //   const shape = new Shape()
-  //   shape.grid = testShape.grid
-  //   shape.type = testShape.type
-  //   shape.position = {x: testShape.start, y: 0}
+  test('render method with board.shape', () => {
+    const testShape = shapes[0]
+    const shape = new Shape()
+    shape.grid = testShape.grid
+    shape.type = testShape.type
+    shape.position = {x: testShape.start, y: 0}
 
-  //   board.shape = shape
-  //   const expected = '<div class=\"board\"><div class=\"row\"><div class=\"block\" type=\"x\"></div><div class=\"block\" type=\"x\"></div><div class=\"block\" type=\"x\"></div><div class=\"block\" type=\"l\"></div><div class=\"block\" type=\"l\"></div><div class=\"block\" type=\"l\"></div><div class=\"block\" type=\"x\"></div><div class=\"block\" type=\"x\"></div><div class=\"block\" type=\"x\"></div><div class=\"block\" type=\"x\"></div></div>'
-  //   expect(board.render().replace(/[\t\n]/g, '').substring(0,expected.length)).toBe(expected)
-  // })
+    board.shape = shape
+    expect(board.render()).toMatchSnapshot()
+  })
 })
