@@ -1,19 +1,11 @@
+jest.mock('../src/shapes')
 import Shape from '../src/Shape'
-import shapes from '../src/shapes'
 
 describe('Shape', () => {
   let shape
   
   beforeEach(() => {
-    shape = new Shape({w:10, h:18})
-  })
-
-  test('initial setup', () => {
-    expect(shape.type).toHaveLength(1)
-    expect(shape.position.y).toBe(0)
-    expect(shape.position.x).toBeGreaterThanOrEqual(0)
-    expect(shape.position.x).toBeLessThanOrEqual(9)
-    expect(shape.grid).toBeInstanceOf(Array)
+    shape = new Shape({w:10, h:19})
   })
 
   test('move method - positive move', () => {
@@ -33,23 +25,13 @@ describe('Shape', () => {
   })
 
   test('rotate CCW', () => {
-    const testShape = shapes[0]
-    shape.grid = testShape.grid
-    shape.type = testShape.type
-    shape.position = {x: testShape.start, y: 0}
-
-    const expected = [[1,0],[1,0],[1,1]]
+    const expected = [[1, 0], [1, 1], [1, 0]]
     shape.rotateCCW()
     expect(shape.grid).toEqual(expected)
   })
 
   test('rotate CW', () => {
-    const testShape = shapes[0]
-    shape.grid = testShape.grid
-    shape.type = testShape.type
-    shape.position = {x: testShape.start, y: 0}
-
-    const expected = [[1, 1], [0, 1], [0, 1]]
+    const expected = [[0, 1], [1, 1], [0, 1]]
     shape.rotateCW()
     expect(shape.grid).toEqual(expected)
   })

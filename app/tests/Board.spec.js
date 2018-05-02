@@ -1,6 +1,6 @@
 import Board from '../src/Board'
+jest.mock('../src/shapes')
 import Shape from '../src/Shape'
-import shapes from '../src/shapes'
 
 const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
@@ -11,7 +11,7 @@ describe('Board', () => {
     board = new Board()
   })
 
-  test('has 18 rows with 10 columns filled with 0', () => {
+  test('has 19 rows with 10 columns filled with 0', () => {
     expect.assertions(2)
     expect(board.board).toBeInstanceOf(Array)
     expect(board.board).toHaveLength(190)
@@ -28,18 +28,18 @@ describe('Board', () => {
   })
 
   test('row method returns row', () => {
-    const row = new Array(10).fill('x')
-    expect(board.row(0)).toEqual(row)
+    const expected = new Array(10).fill('x')
+    expect(board.row(0)).toEqual(expected)
   })
 
   test('render method with board.shape', () => {
-    const testShape = shapes[0]
-    const shape = new Shape()
-    shape.grid = testShape.grid
-    shape.type = testShape.type
-    shape.position = {x: testShape.start, y: 0}
+    board.newShape()
+    expect(board.render()).toMatchSnapshot()
+  })
 
-    board.shape = shape
+  test('update method where shape is not at bottom', () => {
+    board.newShape()
+    board.update()
     expect(board.render()).toMatchSnapshot()
   })
 })
