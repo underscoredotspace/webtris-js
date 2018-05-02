@@ -36,7 +36,7 @@ export default class Shape {
       this.position.x += x
     }
 
-    if ((y >0 && size.h + (this.position.y + y) <= this.boardSize.h) || (y<0 && this.position.y >0)) {
+    if ((y >0 && size.h + (this.position.y + y) <= this.boardSize.h)) {
       this.position.y += y
     }
 
