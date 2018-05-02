@@ -21,36 +21,30 @@ window.addEventListener('keydown', keypressed => {
   const key = keypressed.key
 
   if (key == 'p') {
-    if (window.webtrisPaused === true) {
-      window.webtrisPaused = false
-    } else {
-      window.webtrisPaused = true
-    }
+    window.webtrisPaused = (window.webtrisPaused===true ? false : true)
   }
 
-  if (window.webtrisPaused) {
-    return
-  }
+  if (window.webtrisPaused) { return }
 
   switch (key) {
     case 'ArrowLeft':
       board.shape.move(-1,0)
       webtris.innerHTML = board.render()
-      break;
+      break
     case 'ArrowRight':
       board.shape.move(1,0)
       webtris.innerHTML = board.render()
-      break;
+      break
     case 'z':
       board.shape.rotateCCW()
       webtris.innerHTML = board.render()
-      break;
+      break
     case 'x':
       board.shape.rotateCW()
       webtris.innerHTML = board.render()
-      break;
+      break
           
     default:
-      break;
+      break
   }
 })

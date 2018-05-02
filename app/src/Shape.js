@@ -100,7 +100,7 @@ export default class Shape {
   }
 
   positionOk(newRows, newPosition) {
-    if ((newPosition.x < 0) || (newPosition.x+newRows[0].length+1) > this.boardSize.w) {
+    if ((newPosition.x < 0) || (newPosition.x+newRows[0].length) > this.boardSize.w) {
       return false
     }
 

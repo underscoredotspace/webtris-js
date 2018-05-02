@@ -90,4 +90,25 @@ describe('Shape', () => {
       expect(shape.position).toEqual({x:8,y:2})
       expect(shape.grid).toEqual(expected)
   })
+
+  test('shape can be rotated when on right - 1 (regression test)', () => {
+    // setup
+    const expected = [[0, 1], [1, 1], [0, 1]]
+    const board = new Board()
+    board.newShape()
+    const shape = board.shape
+    shape.rotateCW()
+    shape.move(4,3)
+
+    // check we're on left edge
+    expect(shape.position).toEqual({x:7,y:2})
+    expect(shape.grid).toEqual(expected)
+    // tests
+    shape.rotateCCW()
+    expect(shape.position).toEqual({x:7,y:3})
+    expect(shape.grid).toEqual([[1, 1, 1], [0, 1, 0]])
+    shape.rotateCW()
+    expect(shape.position).toEqual({x:7,y:2})
+    expect(shape.grid).toEqual(expected)
+})
 })
