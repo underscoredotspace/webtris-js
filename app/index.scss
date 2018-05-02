@@ -7,9 +7,8 @@ body {
 }
 
 .board {
-  --board-size: 34;
-  width: calc(var(--board-size) * 10px);
-  height: calc(var(--board-size) * 18px);
+  width: calc(90vh / 1.8);
+  height: 90vh;
   display: flex;
   flex-flow: column nowrap;
   border: solid 1px black;
