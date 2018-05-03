@@ -1,9 +1,18 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 body {
   display: grid;
   align-items: center;
   justify-content: center;
   margin: 0;
   height: 100vh;
+  background: #444;
 }
 
 .board {
@@ -11,7 +20,7 @@ body {
   height: 90vh;
   display: flex;
   flex-flow: column nowrap;
-  border: solid 1px black;
+  border: solid 10px black;
 }
 
 .row {
@@ -21,39 +30,44 @@ body {
 
   &:first-of-type {
     opacity: 0.5;
+    display: none;
   }
 }
 
 .block {
+  --lightness: 35%;
   flex: 1;
-  border: solid 1px black;
-  background: silver;
+  border: dotted 0.5px rgba(128,128,128,0.1);
 
   &[type="x"] {
     background: white;
   }
 
   &[type="l"] {
-    background: red;
+    background: hsl(51, 100%, var(--lightness))
   }
 
   &[type="j"] {
-    background: orange;
+    background: hsl(102, 100%, var(--lightness));
   }
 
   &[type="s"] {
-    background: yellow;
+    background: hsl(154, 100%, var(--lightness));
   }
 
   &[type="z"] {
-    background: green;
+    background: hsl(206, 100%, var(--lightness));
   }
 
   &[type="o"] {
-    background: blue;
+    background: hsl(257, 100%, var(--lightness));
   }
 
   &[type="t"] {
-    background: purple;
+    background: hsl(308, 100%, var(--lightness));
+  }
+
+  &[type="i"] {
+    background: hsl(360, 100%, var(--lightness));
   }
 }

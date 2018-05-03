@@ -8,7 +8,7 @@ export default class Shape {
     const {type, grid, start, rotateFix} = this.randomShape()
     this.type = type
     this.grid = grid
-    this.position = {x: start, y: 0}
+    this.position = {x: start, y: 1}
     this.rotateFix = rotateFix
     this.rotateFixPos = 0
   }
