@@ -58,15 +58,15 @@ describe('Shape', () => {
     shape.move(-4,3)
 
     // check we're on left edge
-    expect(shape.position).toEqual({x:0,y:2})
+    expect(shape.position).toEqual({x:0,y:3})
     expect(shape.grid).toEqual(expected)
 
     // tests
     shape.rotateCCW()
-    expect(shape.position).toEqual({x:0,y:2})
+    expect(shape.position).toEqual({x:0,y:3})
     expect(shape.grid).toEqual(expected)
     shape.rotateCW()
-    expect(shape.position).toEqual({x:0,y:2})
+    expect(shape.position).toEqual({x:0,y:3})
     expect(shape.grid).toEqual(expected)
   })
 
@@ -80,14 +80,14 @@ describe('Shape', () => {
       shape.move(5,3)
   
       // check we're on left edge
-      expect(shape.position).toEqual({x:8,y:2})
+      expect(shape.position).toEqual({x:8,y:3})
       expect(shape.grid).toEqual(expected)
       // tests
       shape.rotateCCW()
-      expect(shape.position).toEqual({x:8,y:2})
+      expect(shape.position).toEqual({x:8,y:3})
       expect(shape.grid).toEqual(expected)
       shape.rotateCW()
-      expect(shape.position).toEqual({x:8,y:2})
+      expect(shape.position).toEqual({x:8,y:3})
       expect(shape.grid).toEqual(expected)
   })
 
@@ -101,14 +101,14 @@ describe('Shape', () => {
     shape.move(4,3)
 
     // check we're on left edge
-    expect(shape.position).toEqual({x:7,y:2})
+    expect(shape.position).toEqual({x:7,y:3})
     expect(shape.grid).toEqual(expected)
     // tests
     shape.rotateCCW()
-    expect(shape.position).toEqual({x:7,y:3})
+    expect(shape.position).toEqual({x:7,y:4})
     expect(shape.grid).toEqual([[1, 1, 1], [0, 1, 0]])
     shape.rotateCW()
-    expect(shape.position).toEqual({x:7,y:2})
+    expect(shape.position).toEqual({x:7,y:3})
     expect(shape.grid).toEqual(expected)
 })
 })
