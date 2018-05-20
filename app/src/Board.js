@@ -22,7 +22,11 @@ export default class Board {
 
     const boardHTML = ['<div class="board">']
     for (let row of rows) {
-      boardHTML.push('\t<div class="row">\n')
+      if (this.shape.atBottom && !row.includes('x')) {
+        boardHTML.push('\t<div class="row full">\n')
+      } else {
+        boardHTML.push('\t<div class="row">\n')
+      }
       for (let block of row) {
         boardHTML.push(`\t\t<div class="block" type="${block}"></div>\n`)
       }
@@ -38,6 +42,18 @@ export default class Board {
     this.shape = new Shape(this.boardSize)
   }
 
+  removeFilledRows() {
+    let rows = []
+    for (let row of this.board) {
+      if (row.includes('x')) {
+        rows.push(row.slice())
+      } else {
+        rows.unshift(new Array(this.boardSize.w).fill('x'))
+      }
+    }
+    this.board = rows
+  }
+
   update() {
     const shape = this.shape
     if (shape.atBottom) {
@@ -47,6 +63,9 @@ export default class Board {
       } 
 
       this.board = this.shape.addTo(this.rows())
+
+      this.removeFilledRows()
+
       this.newShape()
     } else {
       shape.move(0,1)

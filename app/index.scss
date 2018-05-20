@@ -32,6 +32,27 @@ body {
     opacity: 0.5;
     // display: none;
   }
+
+  &.full {
+    opacity: 0.5;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: row-full;
+  }
+}
+
+@keyframes row-full {
+  0% {
+    opacity: 0.75;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.75;
+  }
 }
 
 .block {

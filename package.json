@@ -17,7 +17,7 @@
     "start": "parcel app/index.html",
     "build": "parcel build app/index.html --public-url ./",
     "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test:watch": "jest --watchAll --notify",
     "test:ci": "jest -i --coverage && cat coverage/lcov.info | coveralls"
   },
   "jest": {
