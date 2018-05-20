@@ -110,5 +110,10 @@ describe('Shape', () => {
     shape.rotateCW()
     expect(shape.position).toEqual({x:7,y:3})
     expect(shape.grid).toEqual(expected)
-})
+  })
+
+
+  test("this.atBottom = true when shape touches bottom of board", () => {
+    const board = new Board()
+  })
 })

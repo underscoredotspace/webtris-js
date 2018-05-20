@@ -3,11 +3,18 @@ import shapes from '../src/shapes'
 
 export default class Board {
   constructor() {
-    this.boardW = 10
-    this.boardH = 19
+    this.boardSize = {w: 10, h: 19}
 
-    this.board = new Array(this.boardH*this.boardW).fill('x')
+    this.board =[]
+    for (let y=0; y<this.boardSize.h; y++) {
+      this.board.push([])
+      for (let x=0; x<this.boardSize.w; x++) {
+        this.board[y].push('x')
+      }
+    }
+
     this.shape = null
+    this.newShape()
   }
 
   render() {
@@ -31,13 +38,18 @@ export default class Board {
   } 
 
   newShape() {
-    this.shape = new Shape({w:this.boardW, h:this.boardH})
+    this.shape = new Shape(this.boardSize)
   }
 
   update() {
     const shape = this.shape
     if (shape.atBottom) {
-      this.board = shape.addTo(this.rows()).reduce((acc, val) => acc.concat(val), [])
+      if (!shape.resetNext) {
+        shape.resetNext = true
+        return
+      } 
+
+      this.board = this.shape.addTo(this.rows())
       this.newShape()
     } else {
       shape.move(0,1)
@@ -46,17 +58,9 @@ export default class Board {
   
   rows() {
     let rows = []
-    for (let row = 0; row <= (this.boardH-1); row++) {
-      const rowStart = row * (this.boardW-1)
-      rows.push(
-        this.board.slice(rowStart, rowStart+this.boardW)
-      )
+    for (let row of this.board) {
+      rows.push(row.slice())
     }
     return rows
-  }
-  
-  row(row) {
-    const rowStart = row * (this.boardW-1)
-    return this.board.slice(rowStart, rowStart+this.boardW)
   }
 }

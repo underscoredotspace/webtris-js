@@ -4,11 +4,12 @@ export default class Shape {
   constructor(boardSize) {
     this.boardSize = boardSize
     this.atBottom = false
+    this.resetNext = false
 
     const {type, grid, start, rotateFix} = this.randomShape()
     this.type = type
     this.grid = grid
-    this.position = {x: start, y: 1}
+    this.position = {x: start, y: 2}
     this.rotateFix = rotateFix
     this.rotateFixPos = 0
   }
@@ -18,7 +19,7 @@ export default class Shape {
     const max = shapes.length - 1
     const rnd = Math.floor(Math.random() * (max - min + 1) + min)
 
-    return shapes[rnd]
+    return shapes[4]
   }
 
   size() {
@@ -32,15 +33,18 @@ export default class Shape {
     if (y<0) { y=0 }
 
     const size = this.size()
-    if ((x>0 && size.w + (this.position.x + x) <= this.boardSize.w) || (x<0 && this.position.x >0)) {
-      this.position.x += x
+    const position = this.position
+    const boardSize = this.boardSize
+
+    if ((x>0 && size.w + (position.x + x) <= boardSize.w) || (x<0 && position.x >0)) {
+      position.x += x
     }
 
-    if ((y >0 && size.h + (this.position.y + y) <= this.boardSize.h)) {
-      this.position.y += y
+    if ((y >0 && size.h + (position.y + y) <= boardSize.h)) {
+      position.y += y
     }
 
-    if (this.position.y+size.h == this.boardSize.h) {
+    if (position.y+size.h == boardSize.h) {
       this.atBottom = true
     }
   }
@@ -102,6 +106,10 @@ export default class Shape {
   positionOk(newRows, newPosition) {
     if ((newPosition.x < 0) || (newPosition.x+newRows[0].length) > this.boardSize.w) {
       return false
+    }
+
+    if (newPosition.y+newRows.length > this.boardSize.h) {
+      newPosition.y = this.boardSize.h - newRows.length
     }
 
     return true

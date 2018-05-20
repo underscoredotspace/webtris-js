@@ -4,17 +4,15 @@ const board = new Board()
 const webtris = document.querySelector('.webtris')
 
 function update() {
-  if ((performance.now() > updateTime + 500) && !window.webtrisPaused) {
-    board.update()
+  if ((performance.now() > updateTime + 300) && !window.webtrisPaused) {
     webtris.innerHTML = board.render()
+    board.update()
     updateTime = performance.now()
   }
   requestAnimationFrame(update)
 }
 
-board.newShape()
-webtris.innerHTML = board.render()
-let updateTime = performance.now()-500
+let updateTime = performance.now()
 update()
 
 window.addEventListener('keydown', keypressed => {
