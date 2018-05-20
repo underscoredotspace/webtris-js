@@ -18,10 +18,7 @@ export default class Board {
   }
 
   render() {
-    let rows = this.rows()
-    if (this.shape) {
-      rows = this.shape.addTo(rows)
-    }
+    const rows = this.shape.addTo(this.rows())
 
     const boardHTML = ['<div class="board">']
     for (let row of rows) {

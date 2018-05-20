@@ -109,7 +109,8 @@ export default class Shape {
     }
 
     if (newPosition.y+newRows.length > this.boardSize.h) {
-      newPosition.y = this.boardSize.h - newRows.length
+      return false
+      // newPosition.y = this.boardSize.h - newRows.length
     }
 
     return true

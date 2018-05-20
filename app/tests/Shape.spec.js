@@ -52,7 +52,6 @@ describe('Shape', () => {
     const expected = [[1, 0], [1, 1], [1, 0]]
     // setup
     const board = new Board()
-    board.newShape()
     const shape = board.shape
     shape.rotateCCW()
     shape.move(-4,3)
@@ -74,7 +73,6 @@ describe('Shape', () => {
       // setup
       const expected = [[0, 1], [1, 1], [0, 1]]
       const board = new Board()
-      board.newShape()
       const shape = board.shape
       shape.rotateCW()
       shape.move(5,3)
@@ -95,7 +93,6 @@ describe('Shape', () => {
     // setup
     const expected = [[0, 1], [1, 1], [0, 1]]
     const board = new Board()
-    board.newShape()
     const shape = board.shape
     shape.rotateCW()
     shape.move(4,3)
@@ -115,5 +112,23 @@ describe('Shape', () => {
 
   test("this.atBottom = true when shape touches bottom of board", () => {
     const board = new Board()
+    const shape = board.shape
+
+    shape.move(0, 15)
+
+    expect(shape.position).toEqual({x:3,y:17})
+    expect(shape.atBottom).toBeTruthy()
+  })
+
+  test("shape can't rotate when center of piece is on bottom", () => {
+    const board = new Board()
+    const shape = board.shape
+
+    shape.rotateCCW()
+    shape.rotateCCW()
+    shape.move(0, 16)
+    shape.rotateCW()
+
+    expect(shape.position).toEqual({x:3,y:17})
   })
 })

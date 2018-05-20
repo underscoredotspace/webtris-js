@@ -39,10 +39,19 @@ describe('Board', () => {
     expect(board.render()).toMatchSnapshot()
   })
 
-  test('update method where shape is at the bottom', () => {
+  test('update method where shape gets at the bottom', () => {
     board.newShape()
-    board.shape.move(0,17)
+    board.shape.move(0,15)
     board.update()
     expect(board.render()).toMatchSnapshot()
+  })
+
+  test('update method where shape is already at the bottom', () => {
+    board.newShape()
+    board.shape.move(0,15)
+    board.update()
+    board.update()
+
+    expect(board.shape.atBottom).toBeFalsy()
   })
 })
