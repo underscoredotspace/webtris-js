@@ -19,7 +19,7 @@ export default class Shape {
     const max = shapes.length - 1
     const rnd = Math.floor(Math.random() * (max - min + 1) + min)
 
-    return shapes[4]
+    return shapes[rnd]
   }
 
   size() {

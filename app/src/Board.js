@@ -5,7 +5,7 @@ export default class Board {
   constructor() {
     this.boardSize = {w: 10, h: 19}
 
-    this.board =[]
+    this.board = []
     for (let y=0; y<this.boardSize.h; y++) {
       this.board.push([])
       for (let x=0; x<this.boardSize.w; x++) {
