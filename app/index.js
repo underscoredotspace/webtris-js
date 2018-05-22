@@ -6,7 +6,12 @@ const webtris = document.querySelector('.webtris')
 function update() {
   if ((performance.now() > updateTime + 300) && !window.webtrisPaused) {
     webtris.innerHTML = board.render()
-    board.update()
+    if (board.shape.gameover) {
+      alert("Oh Bugger!")
+      board = new Board(10, 19)
+    } else {
+      board.update()
+    }
     updateTime = performance.now()
   }
   requestAnimationFrame(update)

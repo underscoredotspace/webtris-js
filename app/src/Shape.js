@@ -14,6 +14,10 @@ export default class Shape {
     this.position = {x: start, y: 2}
     this.rotateFix = rotateFix
     this.rotateFixPos = 0
+
+    if (!this.positionOk(this.grid, this.position)) {
+      this.gameover = true
+    }
   }
 
   randomShape() {
