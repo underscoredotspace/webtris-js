@@ -31,6 +31,12 @@ export default class Shape {
     }
   }
 
+  plummet() {
+    while (!this.resetNext) {
+      this.move(0,1)
+    }
+  }
+
   move(x, y) {
     if (this.resetNext) { return }
     if (y<0) { y=0 }
@@ -42,6 +48,15 @@ export default class Shape {
 
     if (this.positionOk(this.grid, newPosition)) {
       this.position = Object.assign({}, newPosition)
+      this.atBottom = false
+      this.resetNext = false
+    } else if (y == 1) {
+      if (this.atBottom) {
+        this.resetNext = true
+        return
+      }
+      this.atBottom = true
+      return
     }
 
     this.checkBottom()
@@ -117,11 +132,14 @@ export default class Shape {
       return false
     }
 
-    // for (let row in grid) {
-    //   for (let col in grid[row]) {
-
-    //   }
-    // }
+    for (let row in grid) {
+      for (let col in grid[row]) {
+        if (grid[row][col] === 0) { continue }
+        if (this.board[Number(row)+position.y][Number(col)+position.x] != 'x') {
+          return false
+        }
+      }
+    }
 
     return true
   }

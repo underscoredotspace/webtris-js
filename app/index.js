@@ -84,6 +84,11 @@ window.addEventListener('keydown', keypressed => {
       board.shape.move(1,0)
       webtris.innerHTML = board.render()
       break
+    case 'ArrowDown':
+      board.shape.move(0,1)
+      updateTime = performance.now()
+      webtris.innerHTML = board.render()
+      break
     case 'z':
       board.shape.rotateCCW()
       webtris.innerHTML = board.render()
@@ -92,8 +97,11 @@ window.addEventListener('keydown', keypressed => {
       board.shape.rotateCW()
       webtris.innerHTML = board.render()
       break
-          
+    case ' ':
+      board.shape.plummet()
+      webtris.innerHTML = board.render()
     default:
+      console.log(key)
       break
   }
 })
