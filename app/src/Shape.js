@@ -1,10 +1,12 @@
 import shapes from './shapes'
 
 export default class Shape {
-  constructor(boardSize) {
-    this.boardSize = boardSize
+  constructor(boardSize, board) {
     this.atBottom = false
     this.resetNext = false
+
+    this.boardSize = boardSize
+    this.board = board
 
     const {type, grid, start, rotateFix} = this.randomShape()
     this.type = type
@@ -30,34 +32,32 @@ export default class Shape {
   }
 
   move(x, y) {
+    if (this.resetNext) { return }
     if (y<0) { y=0 }
 
-    const size = this.size()
-    const position = this.position
-    const boardSize = this.boardSize
-
-    if ((x>0 && size.w + (position.x + x) <= boardSize.w) || (x<0 && position.x >0)) {
-      position.x += x
+    const newPosition = {
+      x: this.position.x + x,
+      y: this.position.y + y
     }
 
-    if ((y >0 && size.h + (position.y + y) <= boardSize.h)) {
-      position.y += y
+    if (this.positionOk(this.grid, newPosition)) {
+      this.position = Object.assign({}, newPosition)
     }
 
-    if (position.y+size.h == boardSize.h) {
-      this.atBottom = true
-    }
+    this.checkBottom()
   }
 
   rotateCCW() {
+    if (this.resetNext) { return }
     if (this.type == 'o') { return }
-    
-    const rows = this.grid.slice()
-    const newRows = [...Array(rows[0].length)].map(e => Array(rows.length))
 
-    for (let row in rows) {
-      for (let col in rows[row]) {
-        newRows[rows[0].length-col-1][row] = rows[row][col]
+    
+    const grid = this.grid.slice()
+    const newGrid = [...Array(grid[0].length)].map(e => Array(grid.length))
+
+    for (let row in grid) {
+      for (let col in grid[row]) {
+        newGrid[grid[0].length-col-1][row] = grid[row][col]
       }
     }
 
@@ -69,22 +69,25 @@ export default class Shape {
     let newRotateFixPos =  this.rotateFixPos-1
     if (newRotateFixPos == -1) {newRotateFixPos = this.rotateFix.length-1}
 
-    if (this.positionOk(newRows, newPosition)) {
-      this.grid = newRows
+    if (this.positionOk(newGrid, newPosition)) {
+      this.grid = newGrid
       this.position = Object.assign({}, newPosition)
       this.rotateFixPos = newRotateFixPos
     }
+
+    this.checkBottom()
   }
 
   rotateCW() {
+    if (this.resetNext) { return }
     if (this.type == 'o') { return }
 
-    const rows = this.grid.slice()
-    const newRows = [...Array(rows[0].length)].map(e => Array(rows.length))
+    const grid = this.grid.slice()
+    const newGrid = [...Array(grid[0].length)].map(e => Array(grid.length))
 
-    for (let row in rows) {
-      for (let col in rows[row]) {
-        newRows[col][rows.length-row-1] = rows[row][col]
+    for (let row in grid) {
+      for (let col in grid[row]) {
+        newGrid[col][grid.length-row-1] = grid[row][col]
       }
     }
 
@@ -96,24 +99,44 @@ export default class Shape {
       y: this.position.y + this.rotateFix[newRotateFixPos].y
     }
 
-    if (this.positionOk(newRows, newPosition)) {
-      this.grid = newRows
+    if (this.positionOk(newGrid, newPosition)) {
+      this.grid = newGrid
       this.position = Object.assign({}, newPosition)
       this.rotateFixPos = newRotateFixPos
     }
+
+    this.checkBottom()
   }
 
-  positionOk(newRows, newPosition) {
-    if ((newPosition.x < 0) || (newPosition.x+newRows[0].length) > this.boardSize.w) {
+  positionOk(grid, position) {
+    if ((position.x < 0) || (position.x+grid[0].length) > this.boardSize.w) {
       return false
     }
 
-    if (newPosition.y+newRows.length > this.boardSize.h) {
+    if (position.y+grid.length > this.boardSize.h) {
       return false
-      // newPosition.y = this.boardSize.h - newRows.length
     }
+
+    // for (let row in grid) {
+    //   for (let col in grid[row]) {
+
+    //   }
+    // }
 
     return true
+  }
+
+  checkBottom() {
+    const size = this.size()
+    let position = this.position
+    const boardSize = this.boardSize
+
+    if (position.y+size.h == boardSize.h) {
+      this.atBottom = true
+    } else {
+      this.atBottom = false
+      this.resetNext = false
+    }
   }
 
   addTo(rows) {

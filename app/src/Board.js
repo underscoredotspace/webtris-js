@@ -2,18 +2,12 @@ import Shape from '../src/Shape'
 import shapes from '../src/shapes'
 
 export default class Board {
-  constructor() {
-    this.boardSize = {w: 10, h: 19}
-
-    this.board = []
-    for (let y=0; y<this.boardSize.h; y++) {
-      this.board.push([])
-      for (let x=0; x<this.boardSize.w; x++) {
-        this.board[y].push('x')
-      }
-    }
-
+  constructor(w, h) {
+    debugger
+    this.boardSize = {w, h}
+    this.board = new Array(this.boardSize.h).fill(new Array(this.boardSize.w).fill('x'))
     this.shape = null
+    
     this.newShape()
   }
 
@@ -39,7 +33,7 @@ export default class Board {
   } 
 
   newShape() {
-    this.shape = new Shape(this.boardSize)
+    this.shape = new Shape(this.boardSize, this.board)
   }
 
   removeFilledRows() {

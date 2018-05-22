@@ -1,6 +1,6 @@
 import Board from '../app/src/Board'
 
-let board = new Board()
+let board = new Board(10, 19)
 const webtris = document.querySelector('.webtris')
 
 function update() {
@@ -41,7 +41,7 @@ window.addEventListener('keydown', keypressed => {
         webtris.innerHTML = board.render()
         break
       case 'r':
-        board = new Board()
+        board = new Board(10, 19)
         webtris.innerHTML = board.render()
         window.board = board
         break
@@ -51,6 +51,10 @@ window.addEventListener('keydown', keypressed => {
         break
       case 'x':
         board.shape.rotateCW()
+        webtris.innerHTML = board.render()
+        break
+      case 'u':
+        board.update()
         webtris.innerHTML = board.render()
         break
             

@@ -51,7 +51,7 @@ describe('Shape', () => {
   test('shape can\'t be rotated when on left', () => {
     const expected = [[1, 0], [1, 1], [1, 0]]
     // setup
-    const board = new Board()
+    const board = new Board(10, 19)
     const shape = board.shape
     shape.rotateCCW()
     shape.move(-4,3)
@@ -72,7 +72,7 @@ describe('Shape', () => {
   test('shape can\'t be rotated when on right', () => {
       // setup
       const expected = [[0, 1], [1, 1], [0, 1]]
-      const board = new Board()
+      const board = new Board(10, 19)
       const shape = board.shape
       shape.rotateCW()
       shape.move(5,3)
@@ -92,7 +92,7 @@ describe('Shape', () => {
   test('shape can be rotated when on right - 1 (regression test)', () => {
     // setup
     const expected = [[0, 1], [1, 1], [0, 1]]
-    const board = new Board()
+    const board = new Board(10, 19)
     const shape = board.shape
     shape.rotateCW()
     shape.move(4,3)
@@ -111,7 +111,7 @@ describe('Shape', () => {
 
 
   test("this.atBottom = true when shape touches bottom of board", () => {
-    const board = new Board()
+    const board = new Board(10, 19)
     const shape = board.shape
 
     shape.move(0, 15)
@@ -121,7 +121,7 @@ describe('Shape', () => {
   })
 
   test("shape can't rotate when center of piece is on bottom", () => {
-    const board = new Board()
+    const board = new Board(10, 19)
     const shape = board.shape
 
     shape.rotateCCW()
@@ -131,4 +131,20 @@ describe('Shape', () => {
 
     expect(shape.position).toEqual({x:3,y:17})
   })
+
+  // test("shape can't overlap another", () => {
+  //   const board = new Board(10, 19)
+  //   const shape = board.shape
+
+  //   shape.move(0, 15)
+  //   board.update()
+  //   board.update()
+  //   board.newShape()
+  //   // shape.move(0, 13)
+  //   // board.update()
+
+  //   console.log(board.board)
+
+  //   expect(shape.position).toEqual({x:3,y:15})
+  // })
 })
