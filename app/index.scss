@@ -20,7 +20,8 @@ body {
   height: 90vh;
   display: flex;
   flex-flow: column nowrap;
-  border: solid 10px black;
+  border: solid 5px silver;
+  background-color: silver;
 }
 
 .row {
@@ -29,13 +30,12 @@ body {
   flex-flow: row nowrap;
 
   &:first-of-type {
-    opacity: 0.5;
-    // display: none;
+    // opacity: 0.5;
+    display: none;
   }
 
   &.full {
-    opacity: 0.5;
-    animation-duration: 1s;
+    animation-duration: 0.3s;
     animation-iteration-count: infinite;
     animation-name: row-full;
   }
@@ -43,25 +43,32 @@ body {
 
 @keyframes row-full {
   0% {
-    opacity: 0.75;
+    opacity: 1;
   }
 
   50% {
-    opacity: 0.5;
+    opacity: 0;
   }
 
   100% {
-    opacity: 0.75;
+    opacity: 1;
   }
 }
 
 .block {
-  --lightness: 35%;
+  --lightness: 80%;
   flex: 1;
-  border: dotted 0.5px rgba(128,128,128,0.1);
+  border: solid 3px black;
+  margin: 0.5px;
+  box-shadow: inset 0 0 1vh black;
+  // border-radius: 20%;
 
   &[type="x"] {
     background: white;
+    border-color: rgba(128,128,128,0.0);
+    border-style: dotted;
+    box-shadow: none;
+    // border-radius: 0;
   }
 
   &[type="l"] {

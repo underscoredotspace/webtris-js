@@ -4,9 +4,11 @@ import Board from '../src/Board'
 
 describe('Shape', () => {
   let shape
+  let board
   
   beforeEach(() => {
-    shape = new Shape({w:10, h:19})
+    board = new Board(10,19)
+    shape = board.shape
   })
 
   test('move method - positive move', () => {
