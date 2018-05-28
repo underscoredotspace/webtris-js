@@ -2,23 +2,37 @@ import Board from '../app/src/Board'
 
 let board = new Board(10, 19)
 const webtris = document.querySelector('.webtris')
+const scoreBoard = document.querySelector('.score')
+let lines = 0
 
 function update() {
+  // debugger
+  let removedLines
+
   if ((performance.now() > updateTime + 300) && !window.webtrisPaused) {
     webtris.innerHTML = board.render()
     if (board.shape.gameover) {
       alert("Oh Bugger!")
       board = new Board(10, 19)
     } else {
-      board.update()
+      removedLines = board.update()
     }
     updateTime = performance.now()
+  }
+
+  if (removedLines > 0) {
+    updateScore(removedLines)
   }
   requestAnimationFrame(update)
 }
 
 let updateTime = performance.now()
 update()
+
+function updateScore(removedLines) {
+  lines += removedLines
+  scoreBoard.innerText = lines
+}
 
 window.addEventListener('keydown', keypressed => {
   const key = keypressed.key

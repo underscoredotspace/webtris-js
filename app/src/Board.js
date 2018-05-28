@@ -37,19 +37,23 @@ export default class Board {
   }
 
   removeFilledRows() {
+    let lines = 0
     let rows = []
     for (let row of this.board) {
       if (row.includes('x')) {
         rows.push(row.slice())
       } else {
         rows.unshift(new Array(this.boardSize.w).fill('x'))
+        lines++
       }
     }
     this.board = rows
+    return lines
   }
 
   update() {
     const shape = this.shape
+    let lines = 0
     if (shape.atBottom) {
       if (!shape.resetNext) {
         shape.resetNext = true
@@ -58,12 +62,13 @@ export default class Board {
 
       this.board = this.shape.addTo(this.rows())
 
-      this.removeFilledRows()
+      lines = this.removeFilledRows()
 
       this.newShape()
     } else {
       shape.move(0,1)
     }
+    return lines
   }
   
   rows() {
