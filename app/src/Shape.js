@@ -4,6 +4,7 @@ export default class Shape {
   constructor() {
     const shape = shapes[Math.floor(Math.random() * shapes.length)]
 
+    this.type = shape.type
     this.grid = shape.grid
     this.pos = {x: shape.start, y:2}
     this.rotateFix = shape.rotateFix

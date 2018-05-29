@@ -1,0 +1,698 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game() merged() 1`] = `
+Array [
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "t",
+    "t",
+    "t",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "t",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+  Array [
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+    "x",
+  ],
+]
+`;
+
+exports[`Game() render() with a full row 1`] = `
+"<div class=\\"board\\">	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row full\\">
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+	</div>
+</div>"
+`;
+
+exports[`Game() render() with no full rows 1`] = `
+"<div class=\\"board\\">	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"t\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+	<div class=\\"row\\">
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+		<div class=\\"block\\" type=\\"x\\"></div>
+	</div>
+</div>"
+`;

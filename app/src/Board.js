@@ -1,5 +1,5 @@
 export default class Board {
-  constructor(w, h) {
+  constructor(w = 10, h = 19) {
     this.grid = new Array(h).fill(new Array(w).fill('x'))
     this.size = {w,h}
   }

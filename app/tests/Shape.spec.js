@@ -1,5 +1,5 @@
 jest.mock('../src/shapes')
-import Shape from "../src/Shape";
+import Shape from "../src/Shape"
 
 describe("Shape()", () => {
   let shape
@@ -10,6 +10,7 @@ describe("Shape()", () => {
 
   test("Starting point", () => {
     expect(shape.pos).toEqual({x:3,y:2})
+    expect(shape.type).toEqual('t')
   })
 
   test("move(1)", () => {

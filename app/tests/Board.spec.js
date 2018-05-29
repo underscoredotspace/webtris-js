@@ -1,4 +1,4 @@
-import Board from "../src/Board";
+import Board from "../src/Board"
 
 describe("Board()", () => {
   let board
