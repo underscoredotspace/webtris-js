@@ -1,4 +1,4 @@
-import shapes from 'shapes';
+import shapes from './shapes';
 
 export default class Shape {
   constructor() {
@@ -11,12 +11,23 @@ export default class Shape {
     this.rotateFixNdx = 0
   }
 
+  size() {
+    return {
+      x: this.grid[0].length,
+      y: this.grid.length
+    }
+  }
+
   move(x) {
     this.pos.x += x
   }
 
   drop() {
     this.pos.y++
+  }
+
+  unDrop() {
+    this.pos.y--
   }
 
   rotateCW() {
