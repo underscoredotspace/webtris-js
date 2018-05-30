@@ -29,7 +29,6 @@ describe("Game()", () => {
 
   test("render() with a full row", () => {
     game.board.grid[18] = new Array(10).fill('t')
-    game.atBottom = true
     expect(game.render(game.merged())).toMatchSnapshot()
   })
 

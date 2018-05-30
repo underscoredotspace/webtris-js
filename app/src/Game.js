@@ -2,24 +2,40 @@ import Board from "./Board";
 import Shape from "./Shape";
 
 export default class Game {
-  constructor(boardElement, scoreElement) {
+  constructor(boardElement, scoreElement, nextShapeElement) {
     this.boardElement = boardElement
     this.scoreElement = scoreElement
+    this.nextShapeElement = nextShapeElement
 
     this.board = new Board
-    this.shape = new Shape
-    this.nextShape = new Shape
+    this.shapeQueue = [new Shape, new Shape]
+    this.shape = this.shapeQueue[0]
+    this.nextShape = this.shapeQueue[1]
     this.score = 0
     this.lines = 0
-    this.atBottom = false
 
     this.lastUpdate = 0
     this.updateInterval = 1000
 
     this.addEventListeners()
+    this.updateNextShapeElement()
 
     this.update = this.update.bind(this)
     this.start = this.update
+  }
+
+  selectNextshape() {
+    this.board.grid = this.merged()
+    this.shapeQueue.shift()
+    this.shapeQueue.push(new Shape)
+    this.shape = this.shapeQueue[0]
+    this.nextShape = this.shapeQueue[1]
+
+    this.updateNextShapeElement()
+  }
+
+  updateNextShapeElement() {
+    this.nextShapeElement.innerText = this.nextShape.type
   }
 
   collides() {
@@ -59,9 +75,9 @@ export default class Game {
         ok = false
       }
     }
+
     this.shape.unDrop()
-    this.board.grid = this.merged()
-    this.shape = new Shape
+    this.selectNextshape()
   }
 
   update(time = 0) {
@@ -72,8 +88,7 @@ export default class Game {
         this.boardElement.innerHTML = this.render(merged)
       } else {
         this.shape.unDrop()
-        this.board.grid = this.merged()
-        this.shape = new Shape
+        this.selectNextshape()
       }
 
       this.lastUpdate = time
@@ -85,7 +100,7 @@ export default class Game {
   render(merged) {
     const boardHTML = ['<div class="board">']
     for (let row of merged) {
-      if (this.atBottom && !row.includes('x')) {
+      if (!row.includes('x')) {
         boardHTML.push('\t<div class="row full">\n')
       } else {
         boardHTML.push('\t<div class="row">\n')

@@ -1,6 +1,7 @@
-import Board from '../app/src/Board'
 import Game from './src/Game';
 
 const webtris = document.querySelector('.webtris')
 const scoreBoard = document.querySelector('.score')
-new Game(webtris, scoreBoard).start()
+const nextShape = document.querySelector('.next-shape')
+
+new Game(webtris, scoreBoard, nextShape).start()
