@@ -15,6 +15,7 @@ export default class Game {
     this.lines = 0
 
     this.lastUpdate = 0
+    this.resetNext = false
     this.updateInterval = 300
     this.paused = false
 
@@ -28,12 +29,12 @@ export default class Game {
   }
 
   resetBoard() {
-    this.board.grid = this.merged()
     const lines = this.board.clearFullRows()
-
+    
     this.updateScore(lines)
     this.updateLines(lines)
     this.updateNextShape()
+    this.resetNext = false
 
     if (this.collides()) {
       this.draw()
@@ -42,8 +43,9 @@ export default class Game {
       this.shapeQueue = [new Shape, new Shape]
       this.updateScore(-this.score)
       this.updateLines(-this.lines)
-      this.lastUpdate = 0
     }
+
+    this.lastUpdate = 0
   }
 
   updateScore(lines = 0) {
@@ -113,19 +115,26 @@ export default class Game {
     if (this.paused || time - this.lastUpdate < this.updateInterval) { return }
     this.lastUpdate = time
 
-    this.shape.drop()
-    if (this.collides()) {
-      this.shape.unDrop()
+    if (this.resetNext) {
       this.resetBoard()
-    }
+      this.draw()
+    } else { 
+      this.shape.drop()
 
-    this.draw()
+      if (this.collides()) {
+        this.shape.unDrop()
+        this.board.grid = this.merged()
+        this.resetNext = true
+      }
+      
+      this.draw()
+    }
   }
 
   render(merged) {
     const boardHTML = ['<div class="board">']
     for (let row of merged) {
-      if (!row.includes('x')) {
+      if (this.resetNext && !row.includes('x')) {
         boardHTML.push('\t<div class="row full">\n')
       } else {
         boardHTML.push('\t<div class="row">\n')
