@@ -4,10 +4,14 @@ import Board from '../src/Board';
 import Shape from '../src/Shape';
 
 describe("Game()", () => {
-  let game
+  let game, boardElement, scoreElement, nextShapeElement
 
   beforeEach(() => {
-    game = new Game()
+    boardElement = document.createElement('div')
+    scoreElement = document.createElement('div')
+    nextShapeElement = document.createElement('div')
+
+    game = new Game(boardElement, scoreElement, nextShapeElement)
   })
 
   test("Starting point",  () => {
@@ -16,6 +20,7 @@ describe("Game()", () => {
     expect(game.nextShape).toBeInstanceOf(Shape)
     expect(game.score).toBe(0)
     expect(game.lines).toBe(0)
+    expect(nextShapeElement.innerText).toBe("t")
   })
 
   test("merged()", () => {
@@ -59,6 +64,6 @@ describe("Game()", () => {
 
   test("collides() with shape", () => {
     game.board.grid[2] = new Array(10).fill('t')
-    expect(game.merged()).toBeFalsy()
+    expect(game.collides()).toBeTruthy()
   })
 })

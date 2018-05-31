@@ -11,13 +11,6 @@ export default class Shape {
     this.rotateFixNdx = 0
   }
 
-  size() {
-    return {
-      x: this.grid[0].length,
-      y: this.grid.length
-    }
-  }
-
   move(x) {
     this.pos.x += x
   }

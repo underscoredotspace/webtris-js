@@ -15,35 +15,69 @@ export default class Game {
     this.lines = 0
 
     this.lastUpdate = 0
-    this.updateInterval = 1000
+    this.updateInterval = 300
+    this.paused = false
 
     this.addEventListeners()
-    this.updateNextShapeElement()
+    this.updateNextShape()
+    this.updateScore()
+    this.updateLines()
 
     this.update = this.update.bind(this)
     this.start = this.update
   }
 
-  selectNextshape() {
+  resetBoard() {
     this.board.grid = this.merged()
+    const lines = this.board.clearFullRows()
+
+    this.updateScore(lines)
+    this.updateLines(lines)
+    this.updateNextShape()
+
+    if (this.collides()) {
+      this.draw()
+      alert('oh bugger!')
+      this.board = new Board
+      this.shapeQueue = [new Shape, new Shape]
+      this.updateScore(-this.score)
+      this.updateLines(-this.lines)
+      this.lastUpdate = 0
+    }
+  }
+
+  updateScore(lines = 0) {
+    this.score += lines
+    this.scoreElement.innerText = this.score
+  }
+
+  updateLines(lines = 0) {
+    this.lines += lines
+    // this.linesElement.innerText = this.lines
+  }
+
+  updateNextShape() {
     this.shapeQueue.shift()
     this.shapeQueue.push(new Shape)
     this.shape = this.shapeQueue[0]
     this.nextShape = this.shapeQueue[1]
-
-    this.updateNextShapeElement()
-  }
-
-  updateNextShapeElement() {
     this.nextShapeElement.innerText = this.nextShape.type
   }
 
   collides() {
-    if ((this.shape.pos.y + this.shape.size().y > this.board.size.h) ||
-      (this.shape.pos.x + this.shape.size().x > this.board.size.w) ||
-      (this.shape.pos.x < 0) || (this.shape.pos.y < 0)
-    ) {
-      return true
+    const board = this.board.copy()
+    const shape = this.shape
+
+    for (let row in shape.grid){
+      for (let col in shape.grid[row]) {
+        if (shape.grid[row][col] == 0) { continue }
+
+        const [y,x] = [Number(row)+shape.pos.y, Number(col)+shape.pos.x]
+        // debugger
+        if (!board[y] || !board[y][x] || board[y][x]!='x') {
+          return true
+        }
+      }
     }
 
     return false
@@ -56,9 +90,7 @@ export default class Game {
     for (let row in shape.grid){
       for (let col in shape.grid[row]) {
         if (shape.grid[row][col] == 1) {
-          const [x, y] = [Number(col)+shape.pos.x, Number(row)+shape.pos.y]
-          if (!board[y] || !board[y][x] || board[y][x] != 'x') { return false}
-          board[y][x] = shape.type
+          board[Number(row)+shape.pos.y][Number(col)+shape.pos.x] = shape.type
         }
       }
     }
@@ -67,34 +99,27 @@ export default class Game {
   }
 
   plummet() {
-    let ok = true
-
-    while (ok) {
+    do {
       this.shape.drop()
-      if (!this.merged() || this.collides()) {
-        ok = false
-      }
-    }
+    } while (!this.collides())
 
     this.shape.unDrop()
-    this.selectNextshape()
+    this.lastUpdate = performance.now() - this.updateInterval
   }
 
-  update(time = 0) {
-    if (time - this.lastUpdate > this.updateInterval) {
-      this.shape.drop()
-      const merged = this.merged()
-      if (!this.collides() && merged) {
-        this.boardElement.innerHTML = this.render(merged)
-      } else {
-        this.shape.unDrop()
-        this.selectNextshape()
-      }
+  update() {
+    const time = performance.now()
+    requestAnimationFrame(() => this.update(time))
+    if (this.paused || time - this.lastUpdate < this.updateInterval) { return }
+    this.lastUpdate = time
 
-      this.lastUpdate = time
+    this.shape.drop()
+    if (this.collides()) {
+      this.shape.unDrop()
+      this.resetBoard()
     }
 
-    requestAnimationFrame(this.update)
+    this.draw()
   }
 
   render(merged) {
@@ -116,16 +141,43 @@ export default class Game {
     return boardHTML.join('')
   }
 
+  draw() {
+    this.boardElement.innerHTML = this.render(this.merged())
+  }
+
   addEventListeners() {
     window.addEventListener('keydown', e => {
       const key = e.key
-      switch(key) {
-        case 'ArrowLeft': this.shape.move(-1); break
-        case 'ArrowRight': this.shape.move(1); break
-        case ' ': this.plummet(); break
+
+      if (key == 'p') {
+        this.paused = !this.paused
       }
 
-      this.boardElement.innerHTML = this.render(this.merged())
+      if (this.paused) { return }
+
+      switch(key) {
+        case 'ArrowLeft': 
+          this.shape.move(-1)
+          if (this.collides() || this.merged()==false) {this.shape.move(1)}
+          break
+        case 'ArrowRight': 
+          this.shape.move(1)
+          if (this.collides() || this.merged()==false) {this.shape.move(-1)}
+          break
+        case 'z': 
+          this.shape.rotateCCW()
+          if (this.collides() || this.merged()==false) {this.shape.rotateCW()}
+          break
+        case 'x': 
+          this.shape.rotateCW()
+          if (this.collides() || this.merged()==false) {this.shape.rotateCCW()}
+          break
+        case ' ': 
+          this.plummet()
+          break
+      }
+
+      this.draw()
     })
   }
 }
