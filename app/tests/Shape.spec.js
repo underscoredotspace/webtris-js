@@ -28,10 +28,30 @@ describe("Shape()", () => {
     expect(shape.pos).toEqual({x:3,y:3})
   })
 
+  test("unDrop()", () => {
+    shape.drop()
+    shape.unDrop()
+    expect(shape.pos).toEqual({x:3,y:2})
+  })
+
   test("rotateCW()", () => {
     shape.rotateCW()
     expect(shape.grid).toEqual([[0, 1], [1, 1], [0, 1]])
     expect(shape.pos).toEqual({x:3,y:1})
+  })
+
+  test("rotateCW() with shape.type='o'", () => {
+    shape.type = 'o'
+    shape.rotateCW()
+    expect(shape.grid).toEqual([[1,1,1],[0,1,0]])
+    expect(shape.pos).toEqual({x:3,y:2})
+  })
+
+  test("rotateCWC() with shape.type='o'", () => {
+    shape.type = 'o'
+    shape.rotateCCW()
+    expect(shape.grid).toEqual([[1,1,1],[0,1,0]])
+    expect(shape.pos).toEqual({x:3,y:2})
   })
 
   test("rotateCW() all the way round", () => {

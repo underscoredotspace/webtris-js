@@ -2,9 +2,11 @@ import Board from "./Board";
 import Shape from "./Shape";
 
 export default class Game {
-  constructor(boardElement, scoreElement, nextShapeElement) {
+  constructor(boardElement, scoreElement, linesElement, levelElement, nextShapeElement) {
     this.boardElement = boardElement
     this.scoreElement = scoreElement
+    this.linesElement = linesElement
+    this.levelElement = levelElement
     this.nextShapeElement = nextShapeElement
 
     this.board = new Board
@@ -13,16 +15,17 @@ export default class Game {
     this.nextShape = this.shapeQueue[1]
     this.score = 0
     this.lines = 0
+    this.level = -1
 
     this.lastUpdate = 0
     this.resetNext = false
-    this.updateInterval = 300
+    this.updateInterval = 750
     this.paused = false
 
     this.addEventListeners()
     this.updateNextShape()
-    this.updateScore()
     this.updateLines()
+    this.updateLevel()
 
     this.update = this.update.bind(this)
     this.start = this.update
@@ -31,7 +34,6 @@ export default class Game {
   resetBoard() {
     const lines = this.board.clearFullRows()
     
-    this.updateScore(lines)
     this.updateLines(lines)
     this.updateNextShape()
     this.resetNext = false
@@ -48,14 +50,37 @@ export default class Game {
     this.lastUpdate = 0
   }
 
-  updateScore(lines = 0) {
-    this.score += lines
+  updateScore(score = 0) {
+    this.score += score
     this.scoreElement.innerText = this.score
   }
 
   updateLines(lines = 0) {
     this.lines += lines
-    // this.linesElement.innerText = this.lines
+    this.linesElement.innerText = this.lines
+
+    this.updateLevel()
+
+    let points = 0
+
+    switch(lines) {
+      case 1: points = 40; break
+      case 2: points = 100; break
+      case 3: points = 300; break
+      case 4: points = 1200; break
+    }
+      
+    this.updateScore(points * (this.level+1))
+  }
+
+  updateLevel() {
+    const level = Math.floor(this.lines/10)
+
+    if (level > this.level) { 
+      this.level = level 
+      this.levelElement.innerText = this.level
+      this.updateInterval -= 30
+    }
   }
 
   updateNextShape() {
@@ -101,17 +126,20 @@ export default class Game {
   }
 
   plummet() {
+    let points = 0
     do {
       this.shape.drop()
+      points++
     } while (!this.collides())
 
     this.shape.unDrop()
+    this.updateScore((points-1) * 10)
     this.lastUpdate = performance.now() - this.updateInterval
   }
 
   update() {
     const time = performance.now()
-    requestAnimationFrame(() => this.update(time))
+    requestAnimationFrame(this.update)
     if (this.paused || time - this.lastUpdate < this.updateInterval) { return }
     this.lastUpdate = time
 
@@ -139,9 +167,11 @@ export default class Game {
       } else {
         boardHTML.push('\t<div class="row">\n')
       }
+
       for (let block of row) {
         boardHTML.push(`\t\t<div class="block" type="${block}"></div>\n`)
       }
+
       boardHTML.push('\t</div>\n')
     }
 
@@ -172,6 +202,11 @@ export default class Game {
         case 'ArrowRight': 
           this.shape.move(1)
           if (this.collides() || this.merged()==false) {this.shape.move(-1)}
+          break
+        case 'ArrowDown': 
+          this.shape.drop()
+          if (this.collides() || this.merged()==false) {this.shape.unDrop()}
+          this.lastUpdate = performance.now()
           break
         case 'z': 
           this.shape.rotateCCW()

@@ -24,6 +24,8 @@ export default class Shape {
   }
 
   rotateCW() {
+    if (this.type=='o') { return }
+
     const grid = this.grid
     const newGrid = [...Array(grid[0].length)].map(e => Array(grid.length))
 
@@ -43,6 +45,8 @@ export default class Shape {
   }
 
   rotateCCW() {
+    if (this.type=='o') { return }
+    
     const grid = this.grid
     const newGrid = [...Array(grid[0].length)].map(e => Array(grid.length))
 

@@ -4,14 +4,16 @@ import Board from '../src/Board';
 import Shape from '../src/Shape';
 
 describe("Game()", () => {
-  let game, boardElement, scoreElement, nextShapeElement
+  let game, boardElement, scoreElement, linesElement, levelElement, nextShapeElement
 
   beforeEach(() => {
     boardElement = document.createElement('div')
     scoreElement = document.createElement('div')
+    linesElement = document.createElement('div')
+    levelElement = document.createElement('div')
     nextShapeElement = document.createElement('div')
 
-    game = new Game(boardElement, scoreElement, nextShapeElement)
+    game = new Game(boardElement, scoreElement, linesElement, levelElement, nextShapeElement)
   })
 
   test("Starting point",  () => {
@@ -32,8 +34,14 @@ describe("Game()", () => {
     expect(game.render(game.merged())).toMatchSnapshot()
   })
 
-  test("render() with a full row", () => {
+  test("render() with a full row but resetNext != true", () => {
     game.board.grid[18] = new Array(10).fill('t')
+    expect(game.render(game.merged())).toMatchSnapshot()
+  })
+
+  test("render() with a full row and resetNext is true", () => {
+    game.board.grid[18] = new Array(10).fill('t')
+    game.resetNext = true
     expect(game.render(game.merged())).toMatchSnapshot()
   })
 
@@ -65,5 +73,20 @@ describe("Game()", () => {
   test("collides() with shape", () => {
     game.board.grid[2] = new Array(10).fill('t')
     expect(game.collides()).toBeTruthy()
+  })
+
+  test("plummet()", () => {
+    game.plummet()
+    expect(game.shape.pos).toEqual({x:3, y:17})
+  })
+
+  test("draw()", () => {
+    game.draw()
+    expect(game.boardElement.innerHTML).toMatchSnapshot()
+  })
+
+  test("update()", () => {
+    game.update()
+    
   })
 })
