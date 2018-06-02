@@ -45,6 +45,8 @@ export default class Game {
       this.shapeQueue = [new Shape, new Shape]
       this.updateScore(-this.score)
       this.updateLines(-this.lines)
+      this.updateLevel()
+      this.updateInterval = 750
     }
 
     this.lastUpdate = 0
@@ -76,7 +78,7 @@ export default class Game {
   updateLevel() {
     const level = Math.floor(this.lines/10)
 
-    if (level > this.level) { 
+    if (level != this.level) { 
       this.level = level 
       this.levelElement.innerText = this.level
       this.updateInterval -= 30
@@ -88,7 +90,7 @@ export default class Game {
     this.shapeQueue.push(new Shape)
     this.shape = this.shapeQueue[0]
     this.nextShape = this.shapeQueue[1]
-    this.nextShapeElement.innerText = this.nextShape.type
+    this.nextShapeElement.innerHTML = this.nextShape.render()
   }
 
   collides() {

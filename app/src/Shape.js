@@ -64,4 +64,21 @@ export default class Shape {
     this.rotateFixNdx--
     if (this.rotateFixNdx < 0) {this.rotateFixNdx = this.rotateFix.length-1}
   }
+
+  render() {
+    const boardHTML = ['<div class="board mini">']
+    for (let row of this.grid) {
+      boardHTML.push('\t<div class="row">\n')
+
+      for (let block of row) {
+        boardHTML.push(`\t\t<div class="block" type="${block==1?this.type:'x'}"></div>\n`)
+      }
+
+      boardHTML.push('\t</div>\n')
+    }
+
+    boardHTML.push('</div>')
+
+    return boardHTML.join('')
+  }
 }
