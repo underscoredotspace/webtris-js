@@ -82,10 +82,7 @@ const shapes = [
       [1,1],
       [1,1]
     ],
-    rotateFix: [
-      {x:-1, y:-2},
-      {x:1, y:2}
-    ]
+    rotateFix: []
   }
 ]
 

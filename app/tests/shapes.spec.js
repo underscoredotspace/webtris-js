@@ -2,7 +2,7 @@ import shapes from '../src/shapes'
 
 describe('Shapes list array', () => {
   test('Check props', () => {
-    expect.assertions(123)
+    expect.assertions(115)
     expect(shapes.length).toBe(7)
 
     for (let shape of shapes) {
