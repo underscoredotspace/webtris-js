@@ -102,7 +102,6 @@ export default class Game {
         if (shape.grid[row][col] == 0) { continue }
 
         const [y,x] = [Number(row)+shape.pos.y, Number(col)+shape.pos.x]
-        // debugger
         if (!board[y] || !board[y][x] || board[y][x]!='x') {
           return true
         }
@@ -135,7 +134,7 @@ export default class Game {
     } while (!this.collides())
 
     this.shape.unDrop()
-    this.updateScore((points-1) * 10)
+    this.updateScore((points-1) * 20)
     this.lastUpdate = performance.now() - this.updateInterval
   }
 
@@ -209,6 +208,7 @@ export default class Game {
           this.shape.drop()
           if (this.collides() || this.merged()==false) {this.shape.unDrop()}
           this.lastUpdate = performance.now()
+          this.updateScore(10)
           break
         case 'z': 
           this.shape.rotateCCW()

@@ -3,10 +3,12 @@ import Game from '../src/Game'
 import Board from '../src/Board';
 import Shape from '../src/Shape';
 
-describe("Game()", () => {
+describe("Game() unit tests", () => {
   let game, boardElement, scoreElement, linesElement, levelElement, nextShapeElement
 
   beforeEach(() => {
+    jest.resetAllMocks()
+
     boardElement = document.createElement('div')
     scoreElement = document.createElement('div')
     linesElement = document.createElement('div')
@@ -22,7 +24,7 @@ describe("Game()", () => {
     expect(game.nextShape).toBeInstanceOf(Shape)
     expect(game.score).toBe(0)
     expect(game.lines).toBe(0)
-    expect(nextShapeElement.innerText).toBe("t")
+    expect(nextShapeElement.innerHTML).toMatchSnapshot()
   })
 
   test("merged()", () => {
@@ -85,8 +87,30 @@ describe("Game()", () => {
     expect(game.boardElement.innerHTML).toMatchSnapshot()
   })
 
-  test("update()", () => {
+  test('resetBoard() where new shape does not collide with existing', () => {
+    game.plummet()
     game.update()
+    game.resetBoard()
     
+    expect(game.render(game.merged())).toMatchSnapshot()
+  })
+
+  test("resetBoard() where new shape collides with existing", () => {
+    window.alert = jest.fn()
+    game.collides = jest.fn().mockReturnValueOnce(true)
+
+    game.resetBoard()
+    
+    expect(window.alert).toBeCalledWith('oh bugger!')
+    expect(game.board.grid).toEqual(new Array(19).fill(new Array(10).fill('x')))
+
+    expect(game.score).toBe(0)
+    expect(game.lines).toBe(0)
+    expect(game.level).toBe(0)
+    expect(game.lastUpdate).toBe(0)
   })
 })
+
+// describe('Game() integration tests', () => {
+  
+// });
