@@ -142,22 +142,30 @@ describe("Game() unit tests", () => {
 
   })
 
-  // describe('update()', () => {
+  describe('isUpdateDue()', () => {
+    window.performance.now = jest.fn().mockReturnValue(200)
+    window.requestAnimationFrame = jest.fn()
 
-  //   window.performance = {
-  //     now: jest.fn().mockReturnValue(1000)
-  //   }
+    test('game paused, update time not passed', () => {
+      game.paused = true
+      expect(game.isUpdateDue()).toBeFalsy()
+    })
 
-  //   window.requestAnimationFrame = jest.fn()
+    test('game paused, update time passed', () => {
+      game.paused = true
+      window.performance.now.mockReturnValueOnce(1000)
+      expect(game.isUpdateDue()).toBeFalsy()
+    })
 
-  //   test('this.paused = true', () => {
-  //     game.update()
-  //     game.update()
-  //     expect(game.lastUpdate).toBe(1000)
-  //     game.paused = true
-  //     game.update()
+    test('game not paused, update time not passed', () => {
+      game.paused = false
+      expect(game.isUpdateDue()).toBeFalsy()
+    })
 
-  //     expect(game.lastUpdate).toBe(1000)
-  //   })
-  // })
+    test('game not pased, update time passed', () => {
+      game.paused = false
+      window.performance.now.mockReturnValueOnce(1000)
+      expect(game.isUpdateDue()).toBeTruthy()
+    })
+  })
 })

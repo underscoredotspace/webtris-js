@@ -139,9 +139,9 @@ export default class Game {
   }
 
   isUpdateDue() {
-    const time = performance.now()
+    const time = window.performance.now()
     requestAnimationFrame(this.update)
-    
+
     if ((this.paused) || (time - this.lastUpdate < this.updateInterval)) {
       return false
     }

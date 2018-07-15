@@ -18,7 +18,8 @@
     "build": "parcel build app/index.html --public-url ./",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "test:ci": "jest -i --coverage && cat coverage/lcov.info | coveralls"
+    "test:ci": "jest -i --coverage && cat coverage/lcov.info | coveralls",
+    "coverage:show": "open coverage/lcov-report/index.html"
   },
   "jest": {
     "collectCoverage": true,
