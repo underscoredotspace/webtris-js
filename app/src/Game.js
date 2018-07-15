@@ -207,32 +207,36 @@ export default class Game {
       switch(key) {
         case 'ArrowLeft': 
           this.shape.move(-1)
-          if (this.collides() || this.merged()==false) {this.shape.move(1)}
+          if (this.collides()) {this.shape.move(1)}
+          this.draw()
           break
         case 'ArrowRight': 
           this.shape.move(1)
-          if (this.collides() || this.merged()==false) {this.shape.move(-1)}
+          if (this.collides()) {this.shape.move(-1)}
+          this.draw()
           break
         case 'ArrowDown': 
           this.shape.drop()
-          if (this.collides() || this.merged()==false) {this.shape.unDrop()}
+          if (this.collides()) {this.shape.unDrop()}
           this.lastUpdate = performance.now()
           this.updateScore(10)
+          this.draw()
           break
         case 'z': 
           this.shape.rotateCCW()
-          if (this.collides() || this.merged()==false) {this.shape.rotateCW()}
+          if (this.collides()) {this.shape.rotateCW()}
+          this.draw()
           break
         case 'x': 
           this.shape.rotateCW()
-          if (this.collides() || this.merged()==false) {this.shape.rotateCCW()}
+          if (this.collides()) {this.shape.rotateCCW()}
+          this.draw()
           break
         case ' ': 
           this.plummet()
+          this.draw()
           break
       }
-
-      this.draw()
     })
   }
 }

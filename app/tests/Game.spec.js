@@ -198,4 +198,71 @@ describe("Game() unit tests", () => {
       expect(game.draw).toHaveBeenCalledTimes(3)
     })
   })
+
+  describe('user input by keyboard', () => {
+    test('pause', done => {
+      expect.assertions(1)
+      keypress('p', () => {
+        expect(game.paused).toBeTruthy()
+        done()
+      })
+    });
+
+    test('Move Left', done => {
+      expect.assertions(1)
+      keypress('ArrowLeft', () => {
+        expect(game.shape.pos).toEqual({x:2,y:2})
+        done()
+      })
+    });
+
+    test('Move Right', done => {
+      expect.assertions(1)
+      keypress('ArrowRight', () => {
+        expect(game.shape.pos).toEqual({x:4,y:2})
+        done()
+      })
+    });
+
+    test('Move Down', done => {
+      expect.assertions(1)
+      keypress('ArrowDown', () => {
+        expect(game.shape.pos).toEqual({x:3,y:3})
+        done()
+      })
+    });
+
+    test('Rotate CW', done => {
+      expect.assertions(2)
+      keypress('x', () => {
+        expect(game.shape.pos).toEqual({x:3,y:1})
+        expect(game.shape.grid).toEqual([[0, 1], [1, 1], [0, 1]])
+        done()
+      })
+    });
+
+    test('Rotate CCW', done => {
+      expect.assertions(2)
+      keypress('z', () => {
+        expect(game.shape.pos).toEqual({x:4,y:1})
+        expect(game.shape.grid).toEqual([[1, 0], [1, 1], [1, 0]])
+        done()
+      })
+    });
+
+    test('Plummet', done => {
+      expect.assertions(1)
+      keypress(' ', () => {
+        expect(game.shape.pos).toEqual({x:3,y:17})
+        done()
+      })
+    });
+    
+  });
 })
+
+function keypress(key, cb) {
+  const event = new KeyboardEvent('keydown', {key, bubbles : true})
+  document.dispatchEvent(event)
+  cb()
+}
