@@ -7,8 +7,6 @@ describe("Game() unit tests", () => {
   let game, boardElement, scoreElement, linesElement, levelElement, nextShapeElement
 
   beforeEach(() => {
-    jest.resetAllMocks()
-
     boardElement = document.createElement('div')
     scoreElement = document.createElement('div')
     linesElement = document.createElement('div')
@@ -24,6 +22,7 @@ describe("Game() unit tests", () => {
     expect(game.nextShape).toBeInstanceOf(Shape)
     expect(game.score).toBe(0)
     expect(game.lines).toBe(0)
+    expect(game.level).toBe(0)
     expect(nextShapeElement.innerHTML).toMatchSnapshot()
   })
 
@@ -91,13 +90,15 @@ describe("Game() unit tests", () => {
     game.plummet()
     game.update()
     game.resetBoard()
-    
-    expect(game.render(game.merged())).toMatchSnapshot()
+    game.draw()
+
+    expect(game.boardElement.innerHTML).toMatchSnapshot()
   })
 
   test("resetBoard() where new shape collides with existing", () => {
     window.alert = jest.fn()
-    game.collides = jest.fn().mockReturnValueOnce(true)
+    game.collides = jest.fn().mockReturnValue(true)
+    game.isUpdateDue = jest.fn().mockReturnValue(true)
 
     game.resetBoard()
     
@@ -109,8 +110,54 @@ describe("Game() unit tests", () => {
     expect(game.level).toBe(0)
     expect(game.lastUpdate).toBe(0)
   })
-})
 
-// describe('Game() integration tests', () => {
-  
-// });
+  describe('updateLines()', () => {
+    test('1 line', () => {
+      game.updateLines(1)
+      expect(game.lines).toBe(1)
+      expect(game.score).toBe(40)
+      expect(game.level).toBe(0)
+    })
+
+    test('2 lines', () => {
+      game.updateLines(2)
+      expect(game.lines).toBe(2)
+      expect(game.score).toBe(100)
+      expect(game.level).toBe(0)
+    })
+
+    test('3 lines', () => {
+      game.updateLines(3)
+      expect(game.lines).toBe(3)
+      expect(game.score).toBe(300)
+      expect(game.level).toBe(0)
+    })
+
+    test('4 lines', () => {
+      game.updateLines(4)
+      expect(game.lines).toBe(4)
+      expect(game.score).toBe(1200)
+      expect(game.level).toBe(0)
+    })
+
+  })
+
+  // describe('update()', () => {
+
+  //   window.performance = {
+  //     now: jest.fn().mockReturnValue(1000)
+  //   }
+
+  //   window.requestAnimationFrame = jest.fn()
+
+  //   test('this.paused = true', () => {
+  //     game.update()
+  //     game.update()
+  //     expect(game.lastUpdate).toBe(1000)
+  //     game.paused = true
+  //     game.update()
+
+  //     expect(game.lastUpdate).toBe(1000)
+  //   })
+  // })
+})

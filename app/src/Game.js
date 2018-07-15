@@ -37,9 +37,9 @@ export default class Game {
     this.updateLines(lines)
     this.updateNextShape()
     this.resetNext = false
+    this.draw()
 
     if (this.collides()) {
-      this.draw()
       alert('oh bugger!')
       this.board = new Board
       this.shapeQueue = [new Shape, new Shape]
@@ -138,26 +138,35 @@ export default class Game {
     this.lastUpdate = performance.now() - this.updateInterval
   }
 
-  update() {
+  isUpdateDue() {
     const time = performance.now()
     requestAnimationFrame(this.update)
-    if (this.paused || time - this.lastUpdate < this.updateInterval) { return }
+    
+    if ((this.paused) || (time - this.lastUpdate < this.updateInterval)) {
+      return false
+    }
+
     this.lastUpdate = time
+    return true
+  }
+
+  update() {
+    if (!this.isUpdateDue()) { return }
 
     if (this.resetNext) {
       this.resetBoard()
-      this.draw()
-    } else { 
-      this.shape.drop()
-
-      if (this.collides()) {
-        this.shape.unDrop()
-        this.board.grid = this.merged()
-        this.resetNext = true
-      }
-      
-      this.draw()
+      return
     }
+
+    this.shape.drop()
+
+    if (this.collides()) {
+      this.shape.unDrop()
+      this.board.grid = this.merged()
+      this.resetNext = true
+    }
+
+    this.draw()
   }
 
   render(merged) {
