@@ -168,4 +168,34 @@ describe("Game() unit tests", () => {
       expect(game.isUpdateDue()).toBeTruthy()
     })
   })
+
+  describe('update', () => {
+    beforeEach(() => {
+      game.isUpdateDue = jest.fn().mockReturnValue(true)
+      game.draw = jest.fn()
+    })
+
+    test('update due', () => {
+      game.update()
+      expect(game.shape.pos).toEqual({x:3, y:3})
+      expect(game.draw).toHaveBeenCalledTimes(1)
+    })
+
+    test('update not due', () => {
+      game.isUpdateDue.mockReturnValueOnce(false)
+      game.update()
+      expect(game.shape.pos).toEqual({x:3, y:2})
+      expect(game.draw).not.toHaveBeenCalled()
+    })
+
+    test('update due and resetNext', () => {
+      game.update()
+      game.update()
+      expect(game.shape.pos).toEqual({x:3, y:4})
+      game.resetNext = true
+      game.update()
+      expect(game.shape.pos).toEqual({x:3, y:2})
+      expect(game.draw).toHaveBeenCalledTimes(3)
+    })
+  })
 })

@@ -52,7 +52,7 @@ export default class Game {
     this.lastUpdate = 0
   }
 
-  updateScore(score = 0) {
+  updateScore(score) {
     this.score += score
     this.scoreElement.innerText = this.score
   }
