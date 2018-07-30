@@ -9,15 +9,18 @@
     "babel-jest": "^23.0.1",
     "babel-preset-env": "^1.7.0",
     "coveralls": "^3.0.1",
+    "husky": "^0.14.3",
     "jest": "^23.1.0",
     "node-sass": "^4.9.0",
-    "parcel-bundler": "^1.9.1"
+    "parcel-bundler": "^1.9.1",
+    "prettier": "^1.13.7",
+    "pretty-quick": "^1.6.0"
   },
   "scripts": {
     "start": "parcel app/index.html",
     "build": "parcel build app/index.html --public-url ./",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test": "jest -i",
+    "test:watch": "jest -i --watchAll",
     "test:ci": "jest -i --coverage && cat coverage/lcov.info | coveralls",
     "coverage:show": "open coverage/lcov-report/index.html"
   },
@@ -29,5 +32,10 @@
     "roots": [
       "app"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
