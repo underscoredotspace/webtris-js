@@ -1,16 +1,23 @@
-import Board from "./Board";
-import Shape from "./Shape";
+import Board from './Board'
+import Shape from './Shape'
+import createElement from './helpers/createElement'
 
 export default class Game {
-  constructor(boardElement, scoreElement, linesElement, levelElement, nextShapeElement) {
+  constructor(
+    boardElement,
+    scoreElement,
+    linesElement,
+    levelElement,
+    nextShapeElement
+  ) {
     this.boardElement = boardElement
     this.scoreElement = scoreElement
     this.linesElement = linesElement
     this.levelElement = levelElement
     this.nextShapeElement = nextShapeElement
 
-    this.board = new Board
-    this.shapeQueue = [new Shape, new Shape]
+    this.board = new Board()
+    this.shapeQueue = [new Shape(), new Shape()]
     this.shape = this.shapeQueue[0]
     this.nextShape = this.shapeQueue[1]
     this.score = 0
@@ -33,7 +40,7 @@ export default class Game {
 
   resetBoard() {
     const lines = this.board.clearFullRows()
-    
+
     this.updateLines(lines)
     this.updateNextShape()
     this.resetNext = false
@@ -41,8 +48,8 @@ export default class Game {
     if (this.collides()) {
       this.draw()
       alert('oh bugger!')
-      this.board = new Board
-      this.shapeQueue = [new Shape, new Shape]
+      this.board = new Board()
+      this.shapeQueue = [new Shape(), new Shape()]
       this.updateScore(-this.score)
       this.updateLines(-this.lines)
       this.updateLevel()
@@ -65,21 +72,29 @@ export default class Game {
 
     let points = 0
 
-    switch(lines) {
-      case 1: points = 40; break
-      case 2: points = 100; break
-      case 3: points = 300; break
-      case 4: points = 1200; break
+    switch (lines) {
+      case 1:
+        points = 40
+        break
+      case 2:
+        points = 100
+        break
+      case 3:
+        points = 300
+        break
+      case 4:
+        points = 1200
+        break
     }
-      
-    this.updateScore(points * (this.level+1))
+
+    this.updateScore(points * (this.level + 1))
   }
 
   updateLevel() {
-    const level = Math.floor(this.lines/10)
+    const level = Math.floor(this.lines / 10)
 
-    if (level != this.level) { 
-      this.level = level 
+    if (level != this.level) {
+      this.level = level
       this.levelElement.innerText = this.level
       this.updateInterval -= 30
     }
@@ -87,7 +102,7 @@ export default class Game {
 
   updateNextShape() {
     this.shapeQueue.shift()
-    this.shapeQueue.push(new Shape)
+    this.shapeQueue.push(new Shape())
     this.shape = this.shapeQueue[0]
     this.nextShape = this.shapeQueue[1]
     this.nextShapeElement.innerHTML = this.nextShape.render()
@@ -97,12 +112,14 @@ export default class Game {
     const board = this.board.copy()
     const shape = this.shape
 
-    for (let row in shape.grid){
+    for (let row in shape.grid) {
       for (let col in shape.grid[row]) {
-        if (shape.grid[row][col] == 0) { continue }
+        if (shape.grid[row][col] == 0) {
+          continue
+        }
 
-        const [y,x] = [Number(row)+shape.pos.y, Number(col)+shape.pos.x]
-        if (!board[y] || !board[y][x] || board[y][x]!='x') {
+        const [y, x] = [Number(row) + shape.pos.y, Number(col) + shape.pos.x]
+        if (!board[y] || !board[y][x] || board[y][x] != 'x') {
           return true
         }
       }
@@ -115,10 +132,11 @@ export default class Game {
     const board = this.board.copy()
     const shape = this.shape
 
-    for (let row in shape.grid){
+    for (let row in shape.grid) {
       for (let col in shape.grid[row]) {
         if (shape.grid[row][col] == 1) {
-          board[Number(row)+shape.pos.y][Number(col)+shape.pos.x] = shape.type
+          board[Number(row) + shape.pos.y][Number(col) + shape.pos.x] =
+            shape.type
         }
       }
     }
@@ -134,20 +152,22 @@ export default class Game {
     } while (!this.collides())
 
     this.shape.unDrop()
-    this.updateScore((points-1) * 20)
+    this.updateScore((points - 1) * 20)
     this.lastUpdate = performance.now() - this.updateInterval
   }
 
   update() {
     const time = performance.now()
     requestAnimationFrame(this.update)
-    if (this.paused || time - this.lastUpdate < this.updateInterval) { return }
+    if (this.paused || time - this.lastUpdate < this.updateInterval) {
+      return
+    }
     this.lastUpdate = time
 
     if (this.resetNext) {
       this.resetBoard()
       this.draw()
-    } else { 
+    } else {
       this.shape.drop()
 
       if (this.collides()) {
@@ -155,34 +175,37 @@ export default class Game {
         this.board.grid = this.merged()
         this.resetNext = true
       }
-      
+
       this.draw()
     }
   }
 
   render(merged) {
-    const boardHTML = ['<div class="board">']
+    const boardHTML = createElement(['board'])
     for (let row of merged) {
+      let rowHTML
+
       if (this.resetNext && !row.includes('x')) {
-        boardHTML.push('\t<div class="row full">\n')
+        rowHTML = createElement(['row', 'full'])
       } else {
-        boardHTML.push('\t<div class="row">\n')
+        rowHTML = createElement(['row'])
       }
 
       for (let block of row) {
-        boardHTML.push(`\t\t<div class="block" type="${block}"></div>\n`)
+        rowHTML.appendChild(createElement(['block'], { type: block }))
       }
 
-      boardHTML.push('\t</div>\n')
+      boardHTML.appendChild(rowHTML)
     }
 
-    boardHTML.push('</div>')
-
-    return boardHTML.join('')
+    return boardHTML
   }
 
   draw() {
-    this.boardElement.innerHTML = this.render(this.merged())
+    // requestAnimationFrame(() => {
+    this.boardElement.removeChild(this.boardElement.lastChild)
+    this.boardElement.appendChild(this.render(this.merged()))
+    // })
   }
 
   addEventListeners() {
@@ -193,32 +216,44 @@ export default class Game {
         this.paused = !this.paused
       }
 
-      if (this.paused) { return }
+      if (this.paused) {
+        return
+      }
 
-      switch(key) {
-        case 'ArrowLeft': 
+      switch (key) {
+        case 'ArrowLeft':
           this.shape.move(-1)
-          if (this.collides() || this.merged()==false) {this.shape.move(1)}
+          if (this.collides() || this.merged() == false) {
+            this.shape.move(1)
+          }
           break
-        case 'ArrowRight': 
+        case 'ArrowRight':
           this.shape.move(1)
-          if (this.collides() || this.merged()==false) {this.shape.move(-1)}
+          if (this.collides() || this.merged() == false) {
+            this.shape.move(-1)
+          }
           break
-        case 'ArrowDown': 
+        case 'ArrowDown':
           this.shape.drop()
-          if (this.collides() || this.merged()==false) {this.shape.unDrop()}
+          if (this.collides() || this.merged() == false) {
+            this.shape.unDrop()
+          }
           this.lastUpdate = performance.now()
           this.updateScore(10)
           break
-        case 'z': 
+        case 'z':
           this.shape.rotateCCW()
-          if (this.collides() || this.merged()==false) {this.shape.rotateCW()}
+          if (this.collides() || this.merged() == false) {
+            this.shape.rotateCW()
+          }
           break
-        case 'x': 
+        case 'x':
           this.shape.rotateCW()
-          if (this.collides() || this.merged()==false) {this.shape.rotateCCW()}
+          if (this.collides() || this.merged() == false) {
+            this.shape.rotateCCW()
+          }
           break
-        case ' ': 
+        case ' ':
           this.plummet()
           break
       }
