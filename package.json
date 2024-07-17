@@ -6,31 +6,10 @@
   "license": "CC-BY-4.0",
   "private": true,
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-jest": "^23.0.1",
-    "babel-preset-env": "^1.7.0",
-    "coveralls": "^3.0.1",
-    "jest": "^23.0.1",
-    "node-sass": "^4.9.0",
-    "parcel-bundler": "^1.8.1"
+    "sass": "^1.77.8",
+    "vite": "^5.3.4"
   },
   "scripts": {
-    "start": "parcel app/index.html",
-    "build": "parcel build app/index.html --public-url ./",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
-    "test:ci": "jest -i --coverage && cat coverage/lcov.info | coveralls"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "app/src/**/*.js"
-    ],
-    "roots": [
-      "app"
-    ]
-  },
-  "dependencies": {
-    "shapes": "^0.4.0"
+    "start": "vite serve ./app"
   }
 }
