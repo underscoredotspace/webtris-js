@@ -2,6 +2,13 @@ import Board from './Board'
 import Shape from './Shape'
 import createElement from './helpers/createElement'
 
+const POINTS = {
+  1:40,
+  2:100,
+  3:300,
+  4:1200
+}
+
 export default class Game {
   constructor(
     boardElement,
@@ -69,35 +76,19 @@ export default class Game {
     this.linesElement.innerText = this.lines
 
     this.updateLevel()
-
-    let points = 0
-
-    switch (lines) {
-      case 1:
-        points = 40
-        break
-      case 2:
-        points = 100
-        break
-      case 3:
-        points = 300
-        break
-      case 4:
-        points = 1200
-        break
-    }
-
-    this.updateScore(points * (this.level + 1))
+    this.updateScore(POINTS[lines] * (this.level + 1))
   }
 
   updateLevel() {
     const level = Math.floor(this.lines / 10)
 
-    if (level != this.level) {
-      this.level = level
-      this.levelElement.innerText = this.level
-      this.updateInterval -= 30
+    if (level === this.level) {
+      return
     }
+
+    this.level = level
+    this.levelElement.innerText = this.level
+    this.updateInterval -= 30
   }
 
   updateNextShape() {
