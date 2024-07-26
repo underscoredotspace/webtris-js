@@ -3,6 +3,7 @@ import Shape from "./Shape";
 import createElement from "./helpers/createElement";
 
 const POINTS = {
+  0: 0,
   1: 40,
   2: 100,
   3: 300,
