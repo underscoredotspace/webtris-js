@@ -1,29 +1,35 @@
 import shapes from "./shapes";
+import { Vector } from "./types";
 
 export default class Shape {
+  public type: string;
+  public pos: Vector;
+  public grid: number[][];
+  private rotateFix: Vector[];
+  private rotateFixNdx: number = 0;
+
   constructor() {
     const shape = shapes[Math.floor(Math.random() * shapes.length)];
 
     this.type = shape.type;
     this.grid = shape.grid;
-    this.pos = { x: shape.start, y: 2 };
+    this.pos = { x: shape.start, y: 1 };
     this.rotateFix = shape.rotateFix;
-    this.rotateFixNdx = 0;
   }
 
-  move(x) {
+  public move(x: Vector["x"]) {
     this.pos.x += x;
   }
 
-  drop() {
+  public drop() {
     this.pos.y++;
   }
 
-  unDrop() {
+  public unDrop() {
     this.pos.y--;
   }
 
-  rotateCW() {
+  public rotateCW() {
     if (this.type == "o") {
       return;
     }
@@ -31,11 +37,12 @@ export default class Shape {
     const grid = this.grid;
     const newGrid = [...Array(grid[0].length)].map((e) => Array(grid.length));
 
-    for (let row in grid) {
-      for (let col in grid[row]) {
-        newGrid[col][grid.length - row - 1] = grid[row][col];
-      }
-    }
+    grid.forEach((row, rowIndex) => {
+      row.forEach((_col, colIndex) => {
+        newGrid[colIndex][grid.length - rowIndex - 1] =
+          grid[rowIndex][colIndex];
+      });
+    });
 
     this.grid = newGrid;
 
@@ -48,7 +55,7 @@ export default class Shape {
     this.pos.y += this.rotateFix[this.rotateFixNdx].y;
   }
 
-  rotateCCW() {
+  public rotateCCW() {
     if (this.type == "o") {
       return;
     }
@@ -56,11 +63,12 @@ export default class Shape {
     const grid = this.grid;
     const newGrid = [...Array(grid[0].length)].map((e) => Array(grid.length));
 
-    for (let row in grid) {
-      for (let col in grid[row]) {
-        newGrid[grid[0].length - col - 1][row] = grid[row][col];
-      }
-    }
+    grid.forEach((row, rowIndex) => {
+      row.forEach((_col, colIndex) => {
+        newGrid[grid[0].length - colIndex - 1][rowIndex] =
+          grid[rowIndex][colIndex];
+      });
+    });
 
     this.grid = newGrid;
 
@@ -73,7 +81,7 @@ export default class Shape {
     }
   }
 
-  render() {
+  public render() {
     const boardHTML = ['<div class="board mini">'];
     for (let row of this.grid) {
       boardHTML.push('\t<div class="row">\n');

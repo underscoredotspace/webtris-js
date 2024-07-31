@@ -1,6 +1,7 @@
 import Board from "./Board";
 import Shape from "./Shape";
 import createElement from "./helpers/createElement";
+import { BoardGrid } from "./types";
 
 const POINTS = {
   0: 0,
@@ -11,12 +12,29 @@ const POINTS = {
 };
 
 export default class Game {
+  private boardElement: Element;
+  private scoreElement: Element;
+  private linesElement: Element;
+  private levelElement: Element;
+  private nextShapeElement: Element;
+  private board: Board;
+  private shapeQueue: Shape[];
+  private shape: Shape;
+  private nextShape: Shape;
+  private score: number;
+  private lines: number;
+  private level: number;
+  private lastUpdate: DOMHighResTimeStamp;
+  private resetNext: boolean;
+  private updateInterval: number;
+  private paused: boolean;
+
   constructor(
-    boardElement,
-    scoreElement,
-    linesElement,
-    levelElement,
-    nextShapeElement,
+    boardElement: Element,
+    scoreElement: Element,
+    linesElement: Element,
+    levelElement: Element,
+    nextShapeElement: Element,
   ) {
     this.boardElement = boardElement;
     this.scoreElement = scoreElement;
@@ -43,7 +61,10 @@ export default class Game {
     this.updateLevel();
 
     this.update = this.update.bind(this);
-    this.start = this.update;
+  }
+
+  public start() {
+    this.update();
   }
 
   resetBoard() {
@@ -69,12 +90,12 @@ export default class Game {
 
   updateScore(score = 0) {
     this.score += score;
-    this.scoreElement.innerText = this.score;
+    this.scoreElement.textContent = `${this.score}`;
   }
 
   updateLines(lines = 0) {
     this.lines += lines;
-    this.linesElement.innerText = this.lines;
+    this.linesElement.textContent = `${this.lines}`;
 
     this.updateLevel();
     this.updateScore(POINTS[lines] * (this.level + 1));
@@ -88,7 +109,7 @@ export default class Game {
     }
 
     this.level = level;
-    this.levelElement.innerText = this.level;
+    this.levelElement.textContent = `${this.level}`;
     this.updateInterval -= 30;
   }
 
@@ -164,7 +185,7 @@ export default class Game {
 
       if (this.collides()) {
         this.shape.unDrop();
-        this.board.grid = this.merged();
+        this.board.setGrid(this.merged());
         this.resetNext = true;
       }
 
@@ -172,10 +193,10 @@ export default class Game {
     }
   }
 
-  render(merged) {
+  render(merged: BoardGrid) {
     const boardHTML = createElement(["board"]);
     for (let row of merged) {
-      let rowHTML;
+      let rowHTML: HTMLDivElement;
 
       if (this.resetNext && !row.includes("x")) {
         rowHTML = createElement(["row", "full"]);
@@ -194,10 +215,8 @@ export default class Game {
   }
 
   draw() {
-    // requestAnimationFrame(() => {
-    this.boardElement.removeChild(this.boardElement.lastChild);
+    this.boardElement.removeChild(this.boardElement.lastChild!);
     this.boardElement.appendChild(this.render(this.merged()));
-    // })
   }
 
   addEventListeners() {
@@ -215,19 +234,19 @@ export default class Game {
       switch (key) {
         case "ArrowLeft":
           this.shape.move(-1);
-          if (this.collides() || this.merged() == false) {
+          if (this.collides()) {
             this.shape.move(1);
           }
           break;
         case "ArrowRight":
           this.shape.move(1);
-          if (this.collides() || this.merged() == false) {
+          if (this.collides()) {
             this.shape.move(-1);
           }
           break;
         case "ArrowDown":
           this.shape.drop();
-          if (this.collides() || this.merged() == false) {
+          if (this.collides()) {
             this.shape.unDrop();
           }
           this.lastUpdate = performance.now();
@@ -235,13 +254,13 @@ export default class Game {
           break;
         case "z":
           this.shape.rotateCCW();
-          if (this.collides() || this.merged() == false) {
+          if (this.collides()) {
             this.shape.rotateCW();
           }
           break;
         case "x":
           this.shape.rotateCW();
-          if (this.collides() || this.merged() == false) {
+          if (this.collides()) {
             this.shape.rotateCCW();
           }
           break;

@@ -1,4 +1,13 @@
-const shapes = [
+import { ShapeGrid, Vector } from "./types";
+
+interface ShapeData {
+  type: string;
+  start: number;
+  grid: ShapeGrid;
+  rotateFix: Vector[];
+}
+
+const shapes: ShapeData[] = [
   {
     type: "l",
     start: 3,
