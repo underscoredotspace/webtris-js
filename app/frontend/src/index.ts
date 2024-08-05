@@ -1,4 +1,4 @@
-import Game from "./src/Game";
+import Game from "./Game";
 
 const webtris = document.querySelector(".webtris")!;
 const scoreBoard = document.querySelector(".score")!;

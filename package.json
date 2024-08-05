@@ -1,25 +1,22 @@
 {
   "name": "webtris",
   "version": "1.0.0",
-  "main": "index.js",
-  "author": "Colin Tindle <ampersand@underscore.space>",
   "license": "CC-BY-4.0",
-  "private": true,
-  "type": "module",
+  "workspaces": [
+    "app/server",
+    "app/frontend"
+  ],
+  "scripts": {
+    "start": "npm run start --workspaces",
+    "build": "npm run build -w app/frontend"
+  },
   "devDependencies": {
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
-    "sass": "^1.77.8",
-    "vite": "^5.3.4",
     "prettier": "^3.3.3"
   },
-  "scripts": {
-    "start": "vite serve",
-    "build": "vite build",
-    "prepare": "husky"
-  },
   "lint-staged": {
-    "*.{js,ts,scss,json}": [
+    "**/*.{js,ts,scss,json}": [
       "prettier --write"
     ]
   }
