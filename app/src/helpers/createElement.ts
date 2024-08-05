@@ -5,7 +5,7 @@ export default function createElement(
   const element = document.createElement("div");
   element.classList.add(...classNames);
 
-  Object.keys(attributes).forEach(([key, value]) => {
+  Object.entries(attributes).forEach(([key, value]) => {
     element.setAttribute(key, value);
   });
 
