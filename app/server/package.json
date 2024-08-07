@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "tsx index.ts"
+    "start": "tsx watch index.ts"
   },
   "dependencies": {
     "fastify": "^4.28.1",

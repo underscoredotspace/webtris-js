@@ -7,16 +7,19 @@
     "app/frontend"
   ],
   "scripts": {
-    "start": "npm run start --workspaces",
+    "start-fe": "npm start -w app/frontend",
+    "start-be": "npm start -w app/server",
+    "start": "conc npm:start-fe npm:start-be",
     "build": "npm run build -w app/frontend"
   },
   "devDependencies": {
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "concurrently": "^8.2.2"
   },
   "lint-staged": {
-    "**/*.{js,ts,scss,json}": [
+    "app/**/*.{js,ts,scss,json}": [
       "prettier --write"
     ]
   }
