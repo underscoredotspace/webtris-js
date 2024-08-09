@@ -12,6 +12,7 @@ const POINTS = {
 };
 
 export default class Game {
+  private infoElement: Element;
   private boardElement: Element;
   private scoreElement: Element;
   private linesElement: Element;
@@ -30,12 +31,14 @@ export default class Game {
   private paused: boolean;
 
   constructor(
+    infoElement: Element,
     boardElement: Element,
     scoreElement: Element,
     linesElement: Element,
     levelElement: Element,
     nextShapeElement: Element,
   ) {
+    this.infoElement = infoElement;
     this.boardElement = boardElement;
     this.scoreElement = scoreElement;
     this.linesElement = linesElement;
@@ -64,6 +67,7 @@ export default class Game {
   }
 
   public start() {
+    this.infoElement.removeAttribute("hidden");
     this.update();
   }
 

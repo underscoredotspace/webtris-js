@@ -2,21 +2,27 @@
   "name": "webtris",
   "version": "1.0.0",
   "license": "CC-BY-4.0",
-  "workspaces": [
-    "app/server",
-    "app/frontend"
-  ],
   "scripts": {
-    "start-fe": "npm start -w app/frontend",
-    "start-be": "npm start -w app/server",
-    "start": "conc npm:start-fe npm:start-be",
-    "build": "npm run build -w app/frontend"
+    "dev": "nodemon -w app/server -x tsx app/server/index.ts",
+    "start": "NODE_ENV=production tsx app/server/index.ts",
+    "build": "vite build"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/shortid": "^0.0.32",
+    "@types/socket.io": "^3.0.2",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.3",
-    "concurrently": "^8.2.2"
+    "sass": "^1.77.8",
+    "socket.io-client": "^4.7.5",
+    "vite": "^5.3.4"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5",
+    "tsx": "^4.16.5",
+    "vite-express": "^0.17.0"
   },
   "lint-staged": {
     "app/**/*.{js,ts,scss,json}": [

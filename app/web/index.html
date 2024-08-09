@@ -10,7 +10,15 @@
 </head>
 
 <body>
-  <table class="info">
+  <dialog id="game-mode" open>
+    <form method="dialog">
+      <label>Play Solo<input type="button" value="Solo" id="solo"></label>
+      <label>Host Multiplayar Game<input type="button" value="Host" id="host"></label>
+      <label>Join Multiplayar Game<input type="button" value="Join" id="join"></label>
+    </form>
+  </dialog>
+
+  <table class="info" hidden>
     <tr>
       <td>Score</td>
       <td class="score"></td>

@@ -151,3 +151,19 @@ body {
     background: hsl(360, 100%, var(--lightness));
   }
 }
+
+dialog {
+  form {
+    display: flex;
+    flex-direction: column;
+    label {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 1rem;
+      input {
+        width: 4rem;
+      }
+    }
+  }
+}
