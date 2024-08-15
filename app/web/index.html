@@ -11,11 +11,12 @@
 
 <body>
   <dialog id="game-mode" open>
-    <form method="dialog">
-      <label>Play Solo<input type="button" value="Solo" id="solo"></label>
-      <label>Host Multiplayar Game<input type="button" value="Host" id="host"></label>
-      <label>Join Multiplayar Game<input type="button" value="Join" id="join"></label>
-    </form>
+    <input type="button" value="Play Solo" id="solo">
+    <hr />
+    <label>Your name<input id="player" /></label>
+    <input type="button" value="Host Game" id="host">
+    <label>Game ID<input id="room" /></label>
+    <input type="button" value="Join Game" id="join">
   </dialog>
 
   <table class="info" hidden>
