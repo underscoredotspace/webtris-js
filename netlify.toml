@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "/socket.io"
-  to = "https://webtris-api.messy.cloud/socket.io"
+  from = "/socket.io/*"
+  to = "https://webtris-api.messy.cloud/socket.io:splat"
   status = 200
   force = true
