@@ -42,3 +42,9 @@ export const join = async (roomId: string, playerName: string) => {
 export const getPlayers = () => {
     socket.emit("get-players");
 };
+
+export const onPlayerJoin = (callback: (playerName: string) => void) => {
+    socket.on("player", (playerName: string) => {
+        callback(playerName);
+    });
+};

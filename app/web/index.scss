@@ -152,16 +152,7 @@ body {
     }
 }
 
-dialog {
+dialog[open] {
     display: flex;
     flex-direction: column;
-    * {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 1rem;
-        input {
-            width: 4rem;
-        }
-    }
 }

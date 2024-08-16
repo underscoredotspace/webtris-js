@@ -12,11 +12,35 @@
 <body>
   <dialog id="game-mode" open>
     <input type="button" value="Play Solo" id="solo">
-    <hr />
-    <label>Your name<input id="player" /></label>
     <input type="button" value="Host Game" id="host">
-    <label>Game ID<input id="room" /></label>
     <input type="button" value="Join Game" id="join">
+  </dialog>
+
+  <dialog id="host-game">
+    <form method="dialog">
+      <label for="player-name">Your Name</label>
+      <input type="text" name="player-name" id="player-name">
+
+      <button type="submit">Host</button>
+    </form>
+  </dialog>
+
+  <dialog id="await-players">
+    <section>Your Room ID is <span id="room-id"></span></section>
+    <form method="dialog">
+      Waiting for players
+      <button type="submit">Start Now</button>
+    </form>
+    <ul id="playerList"></ul>
+  </dialog>
+
+  <dialog id="join-game">
+    <form method="dialog">
+      <label for="player-name">Your Name</label>
+      <input type="text" name="player-name" id="player-name">
+      <label for="room-id">Room ID</label>
+      <input type="text" name="room-id" id="room-id">
+    </form>
   </dialog>
 
   <table class="info" hidden>

@@ -22,6 +22,10 @@ io.on("connection", (socket) => {
 
             socket.join(roomId);
             socket.emit("host-room", roomId);
+
+            setTimeout(() => {
+                socket.emit("player", "bananaman");
+            }, 1000);
         } catch (error) {
             socket.emit("error", error);
         }
