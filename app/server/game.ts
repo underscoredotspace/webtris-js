@@ -24,7 +24,6 @@ export const getPlayersInRoom = (roomId: string): Players => {
     const playerEntries = Array.from(players.entries());
 
     return playerEntries.reduce<Players>((acc, [id, player]) => {
-        console.log("player", player, roomId);
         if (player?.room_id === roomId) {
             acc.set(id, player);
         }

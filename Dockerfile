@@ -8,4 +8,6 @@ RUN npm ci --only=production
 
 COPY . . 
 
-ENTRYPOINT ["npm", "run", "start"]
+CMD [ "npm", "run", "build" ]
+
+ENTRYPOINT ["npm", "run", "prod"]
