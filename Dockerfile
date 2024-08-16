@@ -4,10 +4,8 @@ WORKDIR /app
 
 COPY package*.json .
 
-RUN npm ci --only=production
+RUN npm i
 
 COPY . . 
-
-CMD [ "npm", "run", "build" ]
 
 ENTRYPOINT ["npm", "run", "prod"]
