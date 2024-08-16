@@ -156,3 +156,8 @@ dialog[open] {
     display: flex;
     flex-direction: column;
 }
+
+ul#player-list > .host::after {
+    font-weight: bolder;
+    content: " (host)";
+}

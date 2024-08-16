@@ -29,9 +29,9 @@
     <section>Your Room ID is <span id="room-id"></span></section>
     <form method="dialog">
       Waiting for players
-      <button type="submit">Start Now</button>
+      <button type="submit" hidden>Start Now</button>
     </form>
-    <ul id="playerList"></ul>
+    <ul id="player-list"></ul>
   </dialog>
 
   <dialog id="join-game">
@@ -40,6 +40,7 @@
       <input type="text" name="player-name" id="player-name">
       <label for="room-id">Room ID</label>
       <input type="text" name="room-id" id="room-id">
+      <button type="submit">Join</button>
     </form>
   </dialog>
 

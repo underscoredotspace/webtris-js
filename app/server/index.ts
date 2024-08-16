@@ -2,7 +2,7 @@ import express from "express";
 import http from "node:http";
 import { Server } from "socket.io";
 import ViteExpress from "vite-express";
-import { createRoom, getPlayersInRoom, joinRoom } from "./game";
+import { createRoom, getPlayersInRoom, joinRoom, leaveRoom } from "./game";
 
 ViteExpress.config({
     inlineViteConfig: {
@@ -13,19 +13,24 @@ ViteExpress.config({
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, { pingInterval: 1000, pingTimeout: 2000 });
 
 io.on("connection", (socket) => {
+    socket.on("disconnect", async () => {
+        try {
+            const player = await leaveRoom(socket.id);
+            socket.to(player.room_id).emit("player-left", player.name);
+        } catch (error) {
+            console.error("disconnect", error);
+        }
+    });
+
     socket.on("host", async (playerName: string) => {
         try {
             const roomId = await createRoom(playerName, socket.id);
 
             socket.join(roomId);
             socket.emit("host-room", roomId);
-
-            setTimeout(() => {
-                socket.emit("player", "bananaman");
-            }, 1000);
         } catch (error) {
             socket.emit("error", error);
         }
@@ -33,10 +38,11 @@ io.on("connection", (socket) => {
 
     socket.on("join", async (roomId: string, playerName: string) => {
         try {
-            await joinRoom(roomId, playerName, socket.id);
+            const players = await joinRoom(roomId, playerName, socket.id);
+
             socket.join(roomId);
-            socket.emit("join-room", roomId);
-            socket.to(roomId).emit("player", playerName);
+            socket.emit("join-room", players);
+            socket.to(roomId).emit("player-join", playerName);
         } catch (error) {
             socket.emit("error", error);
         }

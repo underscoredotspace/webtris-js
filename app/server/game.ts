@@ -1,5 +1,5 @@
 import shortUniqueId from "short-unique-id";
-import { PlayerId, RoomId } from "../types";
+import { PlayerId, RoomDetails, RoomId } from "../types";
 
 const id = new shortUniqueId({ length: 5 });
 const generate = () => id.rnd();
@@ -15,18 +15,18 @@ interface Player {
 
 type Players = Map<PlayerId, Player | undefined>;
 type Rooms = Map<RoomId, Room | undefined>;
-const rooms: Rooms = new Map();
-const players: Players = new Map();
+export const rooms: Rooms = new Map();
+export const players: Players = new Map();
 
-export const getRoom = (roomId: RoomId): Room | undefined => rooms[roomId];
+export const getRoom = (roomId: RoomId): Room | undefined => rooms.get(roomId);
 
 export const getPlayersInRoom = (roomId: string): Players => {
-    const playersInRoom: [string, Player | undefined][] =
-        Object.entries(players);
+    const playerEntries = Array.from(players.entries());
 
-    return playersInRoom.reduce<Players>((acc, [id, player]) => {
+    return playerEntries.reduce<Players>((acc, [id, player]) => {
+        console.log("player", player, roomId);
         if (player?.room_id === roomId) {
-            acc[id] = player;
+            acc.set(id, player);
         }
 
         return acc;
@@ -54,7 +54,7 @@ export const joinRoom = async (
     roomId: RoomId,
     playerName: Player["name"],
     playerId: PlayerId,
-): Promise<void> => {
+): Promise<Array<RoomDetails>> => {
     if (alreadyInARoom(playerId)) {
         throw "already in room";
     }
@@ -70,10 +70,23 @@ export const joinRoom = async (
     }
 
     players.set(playerId, { name: playerName, room_id: roomId });
+
+    return Array.from(getPlayersInRoom(roomId).entries()).map(
+        ([id, player]) => ({
+            playerName: player?.name ?? "",
+            isHost: id === room.host_id,
+        }),
+    );
 };
 
-export const leaveRoom = async (playerId: PlayerId): Promise<void> => {
+export const leaveRoom = async (playerId: PlayerId): Promise<Player> => {
+    const player = players.get(playerId);
+    if (!player) {
+        throw "no such player";
+    }
+
     players.delete(playerId);
+    return player;
 };
 
 export const deleteRoom = async (roomId: RoomId): Promise<void> => {
