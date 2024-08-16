@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/socket.io"
+  to = "https://webtris-api.messy.cloud/socket.io"
+  status = 200
+  force = true

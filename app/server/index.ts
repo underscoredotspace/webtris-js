@@ -1,19 +1,15 @@
 import express from "express";
 import http from "node:http";
 import { Server } from "socket.io";
-import ViteExpress from "vite-express";
 import { createRoom, getPlayersInRoom, joinRoom, leaveRoom } from "./game";
 
-ViteExpress.config({
-    inlineViteConfig: {
-        root: "app/web",
-        build: { outDir: "../../dist" },
-    },
-});
-
-const app = express();
-const server = http.createServer(app);
+export const app = express();
+export const server = http.createServer(app);
 const io = new Server(server, { pingInterval: 1000, pingTimeout: 2000 });
+
+app.get("/helth", (_, res) => {
+    res.send(Date.now().toString());
+});
 
 io.on("connection", (socket) => {
     socket.on("disconnect", async () => {
@@ -62,5 +58,3 @@ io.on("connection", (socket) => {
 server.listen(3005, () => {
     console.log("listening on *:3005");
 });
-
-ViteExpress.bind(app, server);

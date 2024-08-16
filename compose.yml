@@ -1,0 +1,8 @@
+services:
+  api:
+    build: .
+    ports:
+      - 3005:3005
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
