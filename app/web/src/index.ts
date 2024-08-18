@@ -55,9 +55,11 @@ async function awaitPlayers({
     }
 
     if (hostName) {
-        awaitPlayersDialog
-            .querySelector("button[type='submit'][hidden]")!
-            .removeAttribute("hidden");
+        const startGameButton = awaitPlayersDialog.querySelector(
+            "button[type='submit'][hidden]",
+        )!;
+
+        startGameButton.removeAttribute("hidden");
         addPlayerToList(hostName, true);
     }
     if (roomDetails) {

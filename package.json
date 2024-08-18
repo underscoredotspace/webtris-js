@@ -4,9 +4,8 @@
   "license": "CC-BY-4.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -w app/server -x tsx app/server/dev.ts",
-    "start": "NODE_ENV=production tsx app/server/dev.ts",
-    "web": "vite app/web",
+    "dev": "nodemon -w app/server -x tsx app/server",
+    "start": "NODE_ENV=production tsx app/server",
     "build": "vite build app/web",
     "prod": "npm run build && npm run start",
     "test": "vitest"
