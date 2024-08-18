@@ -1,11 +1,11 @@
 export interface Vector {
-  x: number;
-  y: number;
+    x: number;
+    y: number;
 }
 
 export interface Size {
-  w: number;
-  h: number;
+    w: number;
+    h: number;
 }
 
 export type ShapeGrid = number[][];

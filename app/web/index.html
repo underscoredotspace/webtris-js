@@ -1,73 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Webtris</title>
+        <link rel="stylesheet" href="index.scss" />
+    </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Webtris</title>
-  <link rel="stylesheet" href="index.scss">
-</head>
+    <body>
+        <dialog id="game-mode" open>
+            <input type="button" value="Play Solo" id="solo" />
+            <input type="button" value="Host Game" id="host" />
+            <input type="button" value="Join Game" id="join" />
+        </dialog>
 
-<body>
-  <dialog id="game-mode" open>
-    <input type="button" value="Play Solo" id="solo">
-    <input type="button" value="Host Game" id="host">
-    <input type="button" value="Join Game" id="join">
-  </dialog>
+        <dialog id="host-game">
+            <form method="dialog">
+                <label for="player-name">Your Name</label>
+                <input type="text" name="player-name" id="player-name" />
 
-  <dialog id="host-game">
-    <form method="dialog">
-      <label for="player-name">Your Name</label>
-      <input type="text" name="player-name" id="player-name">
+                <button type="submit">Host</button>
+            </form>
+        </dialog>
 
-      <button type="submit">Host</button>
-    </form>
-  </dialog>
+        <dialog id="await-players">
+            <section>Your Room ID is <span id="room-id"></span></section>
+            <form method="dialog">
+                Waiting for players
+                <button type="submit" hidden>Start Now</button>
+            </form>
+            <ul id="player-list"></ul>
+        </dialog>
 
-  <dialog id="await-players">
-    <section>Your Room ID is <span id="room-id"></span></section>
-    <form method="dialog">
-      Waiting for players
-      <button type="submit" hidden>Start Now</button>
-    </form>
-    <ul id="player-list"></ul>
-  </dialog>
+        <dialog id="join-game">
+            <form method="dialog">
+                <label for="player-name">Your Name</label>
+                <input type="text" name="player-name" id="player-name" />
+                <label for="room-id">Room ID</label>
+                <input type="text" name="room-id" id="room-id" />
+                <button type="submit">Join</button>
+            </form>
+        </dialog>
 
-  <dialog id="join-game">
-    <form method="dialog">
-      <label for="player-name">Your Name</label>
-      <input type="text" name="player-name" id="player-name">
-      <label for="room-id">Room ID</label>
-      <input type="text" name="room-id" id="room-id">
-      <button type="submit">Join</button>
-    </form>
-  </dialog>
+        <table class="info" hidden>
+            <tr>
+                <td>Score</td>
+                <td class="score"></td>
+            </tr>
+            <tr>
+                <td>Lines</td>
+                <td class="lines"></td>
+            </tr>
+            <tr>
+                <td>Level</td>
+                <td class="level"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="next-shape-text">Next Shape</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="next-shape"></td>
+            </tr>
+        </table>
 
-  <table class="info" hidden>
-    <tr>
-      <td>Score</td>
-      <td class="score"></td>
-    </tr>
-    <tr>
-      <td>Lines</td>
-      <td class="lines"></td>
-    </tr>
-    <tr>
-      <td>Level</td>
-      <td class="level"></td>
-    </tr>
-    <tr>
-      <td colspan="2" class="next-shape-text">Next Shape</td>
-    </tr>
-    <tr>
-      <td colspan="2" class="next-shape"></td>
-    </tr>
-  </table>
-  </div>
-
-  <div class="webtris">Loading...</div>
-  <script type="module" src="./src/index.ts"></script>
-</body>
-
+        <div class="webtris">Loading...</div>
+        <script type="module" src="./src/index.ts"></script>
+    </body>
 </html>
