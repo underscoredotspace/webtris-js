@@ -12,6 +12,22 @@ const nextShape = document.querySelector(".next-shape")!;
 const modeDialog =
     document.querySelector<HTMLDialogElement>("dialog#game-mode")!;
 
+if (process.env.NODE_ENV !== "production") {
+    modeDialog.close();
+    const game = new Game(
+        info,
+        webtris,
+        scoreBoard,
+        lineCount,
+        level,
+        nextShape,
+    );
+    game.start();
+    setTimeout(() => {
+        game.pause();
+    }, 700);
+}
+
 const [soloButton, hostButton, joinButton] =
     modeDialog.querySelectorAll<HTMLButtonElement>("input[type='button']");
 
@@ -61,6 +77,11 @@ async function awaitPlayers({
 
         startGameButton.removeAttribute("hidden");
         addPlayerToList(hostName, true);
+
+        const awaitDialogForm =
+            awaitPlayersDialog.querySelector<HTMLFormElement>("form")!;
+
+        awaitDialogForm.addEventListener("submit", () => {});
     }
     if (roomDetails) {
         roomDetails.forEach(({ playerName, isHost }) => {
