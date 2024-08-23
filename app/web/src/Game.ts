@@ -12,7 +12,6 @@ const POINTS = {
 };
 
 export default class Game {
-    private infoElement: Element;
     private boardElement: Element;
     private scoreElement: Element;
     private linesElement: Element;
@@ -31,14 +30,12 @@ export default class Game {
     private paused: boolean;
 
     constructor(
-        infoElement: Element,
         boardElement: Element,
         scoreElement: Element,
         linesElement: Element,
         levelElement: Element,
         nextShapeElement: Element,
     ) {
-        this.infoElement = infoElement;
         this.boardElement = boardElement;
         this.scoreElement = scoreElement;
         this.linesElement = linesElement;
@@ -46,7 +43,7 @@ export default class Game {
         this.nextShapeElement = nextShapeElement;
 
         this.board = new Board();
-        this.shapeQueue = [new Shape(), new Shape()];
+        this.shapeQueue = this.newShapeQueue();
         this.shape = this.shapeQueue[0];
         this.nextShape = this.shapeQueue[1];
         this.score = 0;
@@ -66,8 +63,12 @@ export default class Game {
         this.update = this.update.bind(this);
     }
 
-    public start() {
-        this.infoElement.removeAttribute("hidden");
+    private newShapeQueue(): Array<Shape> {
+        return new Array(5).fill("").map((shape) => new Shape());
+    }
+
+    public start(unhide: Element) {
+        unhide.removeAttribute("hidden");
         this.update();
     }
 
@@ -86,11 +87,12 @@ export default class Game {
             this.draw();
             alert("oh bugger!");
             this.board = new Board();
-            this.shapeQueue = [new Shape(), new Shape()];
-            this.updateScore(-this.score);
-            this.updateLines(-this.lines);
+            this.shapeQueue = this.newShapeQueue();
+            this.score = 0;
+            this.level = 0;
             this.updateLevel();
             this.updateInterval = 750;
+            this.draw();
         }
 
         this.lastUpdate = 0;
@@ -98,12 +100,10 @@ export default class Game {
 
     updateScore(score = 0) {
         this.score += score;
-        this.scoreElement.textContent = `${this.score}`;
     }
 
     updateLines(lines = 0) {
         this.lines += lines;
-        this.linesElement.textContent = `${this.lines}`;
 
         this.updateLevel();
         this.updateScore(POINTS[lines] * (this.level + 1));
@@ -122,10 +122,11 @@ export default class Game {
     }
 
     updateNextShape() {
-        this.shapeQueue.shift();
-        this.shapeQueue.push(new Shape());
-        this.shape = this.shapeQueue[0];
-        this.nextShape = this.shapeQueue[1];
+        const [shape, ...shapeQueue] = this.shapeQueue;
+        const newShape = new Shape();
+        this.shapeQueue = shapeQueue.concat(newShape);
+        this.shape = shape;
+        this.nextShape = shapeQueue[0];
         this.nextShapeElement.innerHTML = this.nextShape.render();
     }
 
@@ -181,8 +182,7 @@ export default class Game {
         this.lastUpdate = performance.now() - this.updateInterval;
     }
 
-    update() {
-        const time = performance.now();
+    update(time = performance.now()) {
         requestAnimationFrame(this.update);
         if (this.paused || time - this.lastUpdate < this.updateInterval) {
             return;
@@ -200,7 +200,6 @@ export default class Game {
                 this.board.setGrid(this.merged());
                 this.resetNext = true;
             }
-
             this.draw();
         }
     }
@@ -229,6 +228,8 @@ export default class Game {
     draw() {
         this.boardElement.removeChild(this.boardElement.lastChild!);
         this.boardElement.appendChild(this.render(this.merged()));
+        this.scoreElement.textContent = `${this.score}`;
+        this.linesElement.textContent = `${this.lines}`;
     }
 
     addEventListeners() {

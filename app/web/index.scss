@@ -11,18 +11,12 @@ html {
 }
 
 body {
-    display: grid;
-    align-items: center;
-    justify-content: center;
     margin: 0;
     height: 100vh;
     background: #444;
 }
 
-.info {
-    position: absolute;
-    top: 33%;
-    left: 0;
+#game-info {
     padding: 0.5rem;
     background: white;
     font-weight: 900;
@@ -33,6 +27,12 @@ body {
         font-weight: normal;
         text-align: right;
     }
+}
+
+#game-container {
+    display: flex;
+    direction: row;
+    align-items: start;
 }
 
 .board {
@@ -75,7 +75,6 @@ body {
 .board.mini {
     display: inline-block;
     background: none;
-    border: none;
     height: auto;
     width: auto;
     min-width: 0;

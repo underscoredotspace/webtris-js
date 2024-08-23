@@ -1,28 +1,20 @@
-import e from "express";
 import Game from "./Game";
 import { RoomDetails, RoomId } from "../../types";
 
-const webtris = document.querySelector(".webtris")!;
-const info = document.querySelector(".info")!;
-const scoreBoard = document.querySelector(".score")!;
-const lineCount = document.querySelector(".lines")!;
-const level = document.querySelector(".level")!;
-const nextShape = document.querySelector(".next-shape")!;
+const board = document.querySelector("#game-board")!;
+const info = document.querySelector("#game-info")!;
+const scoreBoard = info.querySelector(".score")!;
+const lineCount = info.querySelector(".lines")!;
+const level = info.querySelector(".level")!;
+const nextShape = info.querySelector(".next-shape")!;
 
 const modeDialog =
     document.querySelector<HTMLDialogElement>("dialog#game-mode")!;
 
 if (process.env.NODE_ENV !== "production") {
     modeDialog.close();
-    const game = new Game(
-        info,
-        webtris,
-        scoreBoard,
-        lineCount,
-        level,
-        nextShape,
-    );
-    game.start();
+    const game = new Game(board, scoreBoard, lineCount, level, nextShape);
+    game.start(document.querySelector("#game-container")!);
     setTimeout(() => {
         game.pause();
     }, 700);
@@ -100,14 +92,13 @@ async function awaitPlayers({
             case "solo":
                 modeDialog.close();
                 const game = new Game(
-                    info,
-                    webtris,
+                    board,
                     scoreBoard,
                     lineCount,
                     level,
                     nextShape,
                 );
-                game.start();
+                game.start(document.querySelector("#game-container")!);
                 break;
 
             case "host":
