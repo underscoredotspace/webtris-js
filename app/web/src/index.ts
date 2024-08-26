@@ -2,7 +2,7 @@ import Game from "./Game";
 import { RoomDetails, RoomId } from "../../types";
 
 const board = document.querySelector("#game-board")!;
-const info = document.querySelector("#game-info")!;
+const info = document.querySelector("#play-info")!;
 const scoreBoard = info.querySelector(".score")!;
 const lineCount = info.querySelector(".lines")!;
 const level = info.querySelector(".level")!;
@@ -11,14 +11,14 @@ const nextShape = info.querySelector(".next-shape")!;
 const modeDialog =
     document.querySelector<HTMLDialogElement>("dialog#game-mode")!;
 
-if (process.env.NODE_ENV !== "production") {
-    modeDialog.close();
-    const game = new Game(board, scoreBoard, lineCount, level, nextShape);
-    game.start(document.querySelector("#game-container")!);
-    setTimeout(() => {
-        game.pause();
-    }, 700);
-}
+// if (process.env.NODE_ENV !== "production") {
+//     modeDialog.close();
+//     const game = new Game(board, scoreBoard, lineCount, level, nextShape);
+//     game.start(document.querySelector("#game-container")!);
+//     setTimeout(() => {
+//         game.pause();
+//     }, 700);
+// }
 
 const [soloButton, hostButton, joinButton] =
     modeDialog.querySelectorAll<HTMLButtonElement>("input[type='button']");
@@ -73,7 +73,9 @@ async function awaitPlayers({
         const awaitDialogForm =
             awaitPlayersDialog.querySelector<HTMLFormElement>("form")!;
 
-        awaitDialogForm.addEventListener("submit", () => {});
+        awaitDialogForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+        });
     }
     if (roomDetails) {
         roomDetails.forEach(({ playerName, isHost }) => {
@@ -178,3 +180,5 @@ async function awaitPlayers({
         }
     });
 });
+
+modeDialog.showModal();

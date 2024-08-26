@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <dialog id="game-mode" open>
+    <dialog id="game-mode">
         <input type="button" value="Play Solo" id="solo" />
         <input type="button" value="Host Game" id="host" />
         <input type="button" value="Join Game" id="join" />
@@ -46,7 +46,7 @@
     </dialog>
 
     <div id="game-container" hidden>
-        <table id="game-info">
+        <table class="game-info" id="play-info">
             <tr>
                 <td>Score</td>
                 <td class="score"></td>
@@ -67,6 +67,7 @@
             </tr>
         </table>
         <div id="game-board"><span /></div>
+        <div class="game-info" id="online-info"></div>
     </div>
 
 

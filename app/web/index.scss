@@ -14,9 +14,11 @@ body {
     margin: 0;
     height: 100vh;
     background: #444;
+    overflow: hidden;
 }
 
-#game-info {
+.game-info {
+    width: calc(100vh / 4);
     padding: 0.5rem;
     background: white;
     font-weight: 900;
@@ -27,12 +29,17 @@ body {
         font-weight: normal;
         text-align: right;
     }
+
+    &#online-info {
+        visibility: hidden;
+    }
 }
 
-#game-container {
+#game-container:not([hidden]) {
     display: flex;
-    direction: row;
+    flex-direction: row;
     align-items: start;
+    justify-content: space-between;
 }
 
 .board {
@@ -40,21 +47,20 @@ body {
     height: 100vh;
     display: flex;
     flex-flow: column nowrap;
-    border: solid 1px silver;
-    background-color: silver;
+    background-color: #888;
 }
 
 .row {
     flex: 1;
-    display: flex;
-    flex-flow: row nowrap;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
 
     &:first-of-type {
         display: none;
     }
 
     &.full {
-        animation-duration: 0.3s;
+        animation-duration: 0.25s;
         animation-iteration-count: infinite;
         animation-name: row-full;
     }
@@ -64,7 +70,7 @@ body {
     text-align: center;
     width: 9rem;
     height: 6rem;
-    border: solid 2px silver;
+    border: solid 2px #888;
 
     &-text {
         padding-top: 0.5rem;
@@ -83,10 +89,6 @@ body {
         display: flex;
     }
 
-    .row:first-of-type {
-        display: flex;
-    }
-
     .block {
         flex: none;
         width: 2rem;
@@ -100,7 +102,7 @@ body {
     }
 
     50% {
-        opacity: 0;
+        opacity: 0.25;
     }
 
     100% {
@@ -109,17 +111,17 @@ body {
 }
 
 .block {
-    --lightness: 75%;
-    flex: 1;
-    border: solid 3px black;
-    margin: 0.5px;
-    box-shadow: inset 0 0 1.5vh black;
+    --lightness: 70%;
+
+    &:not([type="x"]) {
+        box-shadow: inset 0 0 1.5vh black;
+        border: solid 3px black;
+        margin: 0.5px;
+    }
 
     &[type="x"] {
         background: white;
-        border-color: rgba(128, 128, 128, 0);
-        border-style: dotted;
-        box-shadow: none;
+        border: dotted 0.5px #888;
     }
 
     &[type="l"] {
@@ -154,6 +156,17 @@ body {
 dialog[open] {
     display: flex;
     flex-direction: column;
+}
+
+dialog::backdrop {
+    background-image: linear-gradient(
+        45deg,
+        magenta,
+        rebeccapurple,
+        dodgerblue,
+        green
+    );
+    opacity: 0.75;
 }
 
 ul#player-list > .host::after {
